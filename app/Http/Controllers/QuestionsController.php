@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Tag;
+use App\Tag_Question;
 use Auth;
 use Validator;
 
 use Illuminate\Http\Request;
 
+// 定義
+define('MAX','5');
+
 class QuestionsController extends Controller
 {
     public function new()
     {
-        return view('questions/new');
+        $tags = Tag::get();
+        return view('questions/new',['tags'=>$tags]);
         // テンプレート「listing/new.blade.php」を表示します。
     }
     // ===ここまでカードを新規作成する処理の追加（フォームへの遷移）===
@@ -22,9 +28,9 @@ class QuestionsController extends Controller
     public function store(Request $request)
     {
         $messages = [
-                'name.required' => 'カード名を入力してください。',
-                'name.max'=>'カード名は255文字以内で入力してください。',
-                'memo.required'=>'メモを入力してください。',
+                'name.required' => 'タイトルを入力してください。',
+                'name.max'=>'タイトルは255文字以内で入力してください。',
+                'content.required'=>'内容を入力してください。',
         ];
         //Validatorを使って入力された値のチェック(バリデーション)処理　（今回は256以上と空欄の場合エラーになります）
         $validator = Validator::make($request->all() , ['name' => 'required|max:256','content'=>['required', 
@@ -35,34 +41,72 @@ class QuestionsController extends Controller
             }
         ]],$messages);
 
-        //バリデーションの結果がエラーの場合
-        if ($validator->fails())
-        {
-            return redirect()->back()->withErrors($validator->errors())->withInput();
-            // 上記では、入力画面に戻りエラーメッセージと、入力した内容をフォーム表示させる処理を記述しています
-        }
-        
-        // 対象listがそのユーザーのものであるかチェック
-        if(!$this->validateList($request->id)){
-            return redirect()->back()->withErrors("それはあなたのリストではありません。")->withInput();
-        }
-
-        // 入力に問題がなければCardモデルを介して、タイトルとかをcardテーブルに保存
+        // 入力に問題がなければCardモデルを介して、タイトルとかをqテーブルに保存
         //eval(\Psy\sh());
-        $card = new Card;
-        $card->title = $request->name;
-        $card->memo = $request->memo;
-        $card->listing_id = $request->id;
-        $card->save();
+        $question = new Question;
+        $question->title = $request->name;
+        $question->user_id = Auth::id();
+        $question->crear_flag = false;
+        $question->content = $request->content;
+        $question->want_know_count=0;
+        $question->save();
+        
+        
+        foreach($request->tags as $tagid){
+            $q = new Tag_Question;
+            $q->tags_id = $tagid;
+            $q->questions_id = $question->id;
+            $q->save();
+        };
         
         // 「/」 ルートにリダイレクト
         return redirect('/');
     }
-    public function index()
-    {
-        // 質問をすべて取得
+    
+    public function index(){
+
+        // ページの初期値
+        $page_id = 1;
+        // ページ数を取得
         $questions = Question::get();
+        $max_page = ceil(count($questions)/MAX);
         
-        return view('questions/index',['questions' => $questions]);
+        // 開始地点と終了地点の質問idを取得
+        $end_id = $page_id * MAX;
+        $start_id = $end_id - MAX + 1;
+        
+        // 配列の初期化
+        $questions = [];
+        
+        // そのページの質問を取得
+        for($i = $start_id; $i <= $end_id; $i++){
+            array_push($questions,Question::find($i));
+        }
+        
+        // トップviewにデータを送る
+        return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
+    }
+    
+    public function paging($page_id){
+        
+        // ページ数を取得
+        $questions = Question::get();
+        $max_page = ceil(count($questions)/MAX);
+        
+        // 開始地点と終了地点の質問idを取得
+        $end_id = $page_id * MAX;
+        $start_id = $end_id - MAX + 1;
+        
+        // 配列の初期化
+        $questions = [];
+        
+        // そのページの質問を取得
+        for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
+            array_push($questions,Question::find($i));
+        }
+        
+        // トップviewにデータを送る
+        return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
+    
     }
 }

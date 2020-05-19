@@ -4,7 +4,7 @@
 <!-- バリデーションエラーの場合に表示 --> 
 @include('common.errors')
   <!-- カード作成フォーム -->
-  <form action="{{ url('storeQuestion)}}" method="POST" class="form-horizontal" onsubmit="return false;">
+  <form action="{{ url('storeQuestion')}}" method="POST" class="form-horizontal" onsubmit="return false;">
   {{csrf_field()}} 
     <div class="form-group container-fluid"> 
       <div class="row">
@@ -14,10 +14,13 @@
         </div>
       </div>
       <div class="row">
+        <select id="list1" name="tags[]" size="5" multiple>
+         @foreach ($tags as $tag)
+          <option value="{{$tag->id}}" >{{$tag->name}}</option>
+         @endforeach
+        </select>
         <label for="carding" class="col-sm-offset-2 col-sm-8 tag">タグ入力</label>
-        <div class="col-sm-offset-2 col-sm-8"> 
-          <input type="text" name="tags" class="form-control" value="{{ old('tag') }}">
-        </div>
+        
       </div>
       <div class="row">
         <label for="carding" class="col-sm-offset-2 col-sm-5 memo">質問内容</label> 
@@ -25,7 +28,7 @@
         <div class="col-sm-offset-2 col-sm-8">
             <textarea id="inputform" name="content" class="form-control" 
               onInput="document.getElementById('inputlength').innerHTML = '（残り' + (65535-(value==null?0:encodeURI(value).replace(/%../g, '*').length)) + 'バイト）';"
-              >{{ old('memo') }}</textarea>
+              >{{ old('content') }}</textarea>
         </div>
       </div>
       <div class="col-sm-offset-5 col-sm-2 text-center button"> 
