@@ -3,7 +3,7 @@
 @section('content')
 <div class="sinupPage">
   <div class="titleArea">
-    <h1>アカウントを新規作成</h1>
+    <h1 class="text-center">アカウントを新規作成</h1>
     <div class="container">
       <form class="mt-5, signupForm" id="new_user" action="{{ route('register') }}" accept-charset="UTF-8" method="post">
         {{ csrf_field() }}
@@ -40,12 +40,13 @@
           <label for="user_password_confirmation">パスワード確認</label>
           <input class="form-control" placeholder="パスワードを再度入力してください" autocomplete="off" type="password" name="password_confirmation" required>
         </div>
-        <div class="text-center">
-          <input type="submit" name="commit" value="アカウントを作成" class="btn submitBtn" data-disable-with="アカウントを作成">
+        <div class="form-group text-center">
+          <input type="submit" name="commit" value="アカウントを作成" class="loginBtn" data-disable-with="アカウントを作成">
         </div>
     </form>
-    <div class=make>
-      <p class="acountPage_link"><a href="{{ route('login') }}">アカウントにサインイン</a></p>
+    <div class="text-center">
+      <!--<p class="acountPage_link"><a href="{{ route('login') }}">アカウントにサインイン</a></p>-->
+      <input type="submit" onClick="location.href='{{ route('login') }}'" value="既にアカウントをお持ちの場合"　class="loginBtn" data-disable-with="既にアカウントをお持ちの場合">
     </div>
   </div>
 </div>

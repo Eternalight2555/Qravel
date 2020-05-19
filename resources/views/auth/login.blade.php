@@ -3,7 +3,7 @@
 @section('content')
 <div class="signinPage">
   <div class="container">
-    <h2 class="title">todoappにログイン</h2>
+    <h1 class="text-center">Qravelにログイン</h1>
     <!--<div class="text-center m-3">or</div>-->
     <form class="new_user" id="new_user" action="{{ route('login') }}" accept-charset="UTF-8" method="post">
     {{ csrf_field() }}
@@ -32,7 +32,8 @@
       </div>
     </form>
     <div class="text-center">
-      <p class="acountPage_link"><a href="{{ route('register') }}">アカウントを作成</a></p>
+      <!--<p class="acountPage_link"><a href="{{ route('register') }}">アカウントを作成</a></p>-->
+      <input type="submit" onClick="location.href='{{ route('register') }}'" value="アカウントを作成"　class="loginBtn" data-disable-with="アカウントを作成">
     </div>
   </div>
 </div>
