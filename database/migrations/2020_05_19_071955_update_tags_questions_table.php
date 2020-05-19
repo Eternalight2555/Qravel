@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UsersQuestions extends Migration
+class UpdateTagsQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class UsersQuestions extends Migration
      */
     public function up()
     {
-        
+        // 
         Schema::create('users_questions',function (Blueprint $table){
             $table->unsignedInteger('users_id');
             $table->unsignedInteger('questions_id');
@@ -32,6 +32,8 @@ class UsersQuestions extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tags_questions', function (Blueprint $table) {
+            //
+        });
     }
 }
