@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// トップページに遷移する
+Route::get('/','QuestionsController@index');
+
+// ページ番号をクリックしたとき、ページ遷移
+Route::get('/ranking_page/{page_id}','QuestionsController@paging');
 
 Auth::routes();
 
