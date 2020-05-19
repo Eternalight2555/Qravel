@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Tag;
+use App\TagsQuestion;
+use App\User;
+use App\Answer;
 use Auth;
 use Validator;
 
@@ -13,6 +17,58 @@ define('MAX','5');
 
 class QuestionsController extends Controller
 {
+    public function new()
+    {
+        $tags = Tag::get();
+        return view('questions/new',['tags'=>$tags]);
+        // テンプレート「listing/new.blade.php」を表示します。
+    }
+    // ===ここまでカードを新規作成する処理の追加（フォームへの遷移）===
+
+
+    // ===ここからカードを新規作成する処理の追加（データベースへの保存）===
+    public function store(Request $request)
+    {
+        $messages = [
+                'name.required' => 'タイトルを入力してください。',
+                'name.max'=>'タイトルは255文字以内で入力してください。',
+                'content.required'=>'内容を入力してください。',
+        ];
+        //Validatorを使って入力された値のチェック(バリデーション)処理　（今回は256以上と空欄の場合エラーになります）
+        $validator = Validator::make($request->all() , ['name' => 'required|max:256','content'=>['required', 
+            function($attribute, $value, $fail){
+                if(strlen($value)>65535){
+                    $fail('メモは65535バイト以内で入力してください。(現在'.strlen($value).'バイト)');
+                }
+            }
+        ]],$messages);
+        
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+        
+        // 入力に問題がなければCardモデルを介して、タイトルとかをqテーブルに保存
+        //eval(\Psy\sh());
+        $question = new Question;
+        $question->title = $request->name;
+        $question->user_id = Auth::id();
+        $question->crear_flag = false;
+        $question->content = $request->content;
+        $question->want_know_count=0;
+        $question->save();
+        
+        
+        foreach($request->tags as $tagid){
+            $q = new TagsQuestion;
+            $q->tags_id = $tagid;
+            $q->questions_id = $question->id;
+            $q->save();
+        };
+        
+        // 「/」 ルートにリダイレクト
+        return redirect('/');
+    }
     
     public function index(){
 
@@ -59,5 +115,32 @@ class QuestionsController extends Controller
         // トップviewにデータを送る
         return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     
+    }
+    
+    public function show($question_id)
+    {
+        // 質問をすべて取得
+        $question = Question::find($question_id);
+        $show_user= Auth::id();
+        
+        return view('questions/show',['question' => $question,'show_user'=>$show_user]);
+    }
+    public function show_userpage(){
+        
+        // ユーザ番号を取得
+        $user_id = Auth::user()->id;
+        
+        // Questionモデルを介してデータを取得
+        $questions = Question::where('user_id',$user_id)->get();
+        
+        // Answerモデルを介してデータを取得
+        $answers = Answer::where('user_id',$user_id)->get();
+        
+        // Userモデルを介してデータを取得
+        $user = User::find($user_id);
+        
+        // データをユーザ詳細画面に送る
+        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user]);
+        
     }
 }

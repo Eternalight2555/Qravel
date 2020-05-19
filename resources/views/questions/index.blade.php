@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="top_wrapper">
-    <div class="contain">
+    <div class="content">
         <div class="ranking_wrapper">
             
             <!-- 質問を表示 -->
             @foreach($questions as $question)
-                <a href="#" class="question_link">
+                <a href="/question/show/{{ $question->id }}" class="question_link">
                     <div class="question">
                         <h3 class="question_title">{{ $question->title }}</h3>
                     </div>
@@ -26,7 +26,7 @@
             
         </div>
     </div>
-    <div class="contain">
+    <div class="content">
         <div class="result_wrapper">
             
         </div>
