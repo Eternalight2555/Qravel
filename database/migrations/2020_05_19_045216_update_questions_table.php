@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagsTable extends Migration
+class UpdateQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::update('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('user_id');
+            $table->boolean('crear_flag');
+            $table->string('title');
+            $table->string('content');
+            $table->integer('want_know_count');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('questions');
     }
 }
