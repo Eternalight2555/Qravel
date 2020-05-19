@@ -60,4 +60,13 @@ class QuestionsController extends Controller
         return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     
     }
+    
+    public function show($question_id)
+    {
+        // 質問をすべて取得
+        $question = Question::find($question_id);
+        $create_user= Auth::id();
+        
+        return view('questions/show',['question' => $question,'create_user'=>$create_user]);
+    }
 }

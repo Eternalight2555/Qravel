@@ -21,3 +21,6 @@ Route::get('/ranking_page/{page_id}','QuestionsController@paging');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/question/show/{question_id}','QuestionsController@show');
+
