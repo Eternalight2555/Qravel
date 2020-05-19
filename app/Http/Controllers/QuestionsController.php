@@ -27,11 +27,10 @@ class QuestionsController extends Controller
                 'memo.required'=>'メモを入力してください。',
         ];
         //Validatorを使って入力された値のチェック(バリデーション)処理　（今回は256以上と空欄の場合エラーになります）
-        $validator = Validator::make($request->all() , ['name' => 'required|max:256','memo'=>['required', 
+        $validator = Validator::make($request->all() , ['name' => 'required|max:256','content'=>['required', 
             function($attribute, $value, $fail){
                 if(strlen($value)>65535){
                     $fail('メモは65535バイト以内で入力してください。(現在'.strlen($value).'バイト)');
-                    
                 }
             }
         ]],$messages);

@@ -15,9 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['middleware'=>['auth']],function(){
-    Route::get('newQuestion/','QuestionsController@new');
-    Route::post('storeQuestion/','QuestionsController@store');
+    
 });
+Route::get('newQuestion/','QuestionsController@new');
+Route::post('storeQuestion/','QuestionsController@store');
 
 Route::get('/','QuestionsController@index');
 
