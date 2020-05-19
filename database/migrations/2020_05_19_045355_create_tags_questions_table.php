@@ -13,6 +13,7 @@ class CreateTagsQuestionsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('users_questions',function (Blueprint $table){
             $table->unsignedInteger('users_id');
             $table->unsignedInteger('questions_id');
