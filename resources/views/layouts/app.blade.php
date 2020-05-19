@@ -8,74 +8,72 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Qravel</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/header.css') }}" rel="stylesheet">
+    
+    <!--bootstrap-->
+    <!--CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <!--JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <link href="{{ secure_asset('css/question_show.css') }}" rel="stylesheet">
+
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        @yield('content')
-    </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @if(Auth::check())<!--ログイン時-->
+    <header class="header">
+      <nav class="nav">
+        <ul class="header_menu">
+          <li class="header_menu_title">
+              <a class="nav-link questionNew" href="/">Qravel</a>
+          </li>
+          <li class="header_menu_new">
+              <!--ログイン時は質問投稿画面に--><a class="nav-link questionNew" href="">質問する</a>　
+          </li>
+          <ul class="header_menu_inner">
+              <!--ログイン時のView-->
+              <li class>
+                  <a class="nav-link user-name" href="" onclick="">
+                    ユーザーさん
+                  </a>
+              </li>
+            </ul>
+        </ul>
+      </nav>
+    </header>
+    @else<!--未ログイン時-->
+    <header class="header">
+      <nav class="nav">
+        <ul class="header_menu">
+          <li class="header_menu_title">
+              <a class="nav-link questionNew" href="/">Qravel</a>
+          </li>
+          <li class="header_menu_new">
+              <!--未ログイン時はログイン画面に--><a class="nav-link questionNew" href="">質問する</a>
+          </li>
+          <ul class="header_menu_inner">
+              <!--未ログイン時のView-->
+              <li class="login">
+                  <a class="nav-link" href="" onclick="">
+                    ログイン
+                  </a>
+              </li>
+              <li class="sign-up">
+                  <a class="nav-link" href="" onclick="">
+                    会員登録
+                  </a>
+              </li>
+            </ul>
+        </ul>
+      </nav>
+    </header>
+    @endif
+    @yield('content')
 </body>
 </html>
