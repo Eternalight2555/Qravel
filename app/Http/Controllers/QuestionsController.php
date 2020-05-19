@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Tag;
-use App\Tag_Question;
+use App\TagsQuestion;
 use Auth;
 use Validator;
 
@@ -40,7 +40,12 @@ class QuestionsController extends Controller
                 }
             }
         ]],$messages);
-
+        
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+        
         // 入力に問題がなければCardモデルを介して、タイトルとかをqテーブルに保存
         //eval(\Psy\sh());
         $question = new Question;
@@ -53,7 +58,7 @@ class QuestionsController extends Controller
         
         
         foreach($request->tags as $tagid){
-            $q = new Tag_Question;
+            $q = new TagsQuestion;
             $q->tags_id = $tagid;
             $q->questions_id = $question->id;
             $q->save();
