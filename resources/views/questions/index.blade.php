@@ -8,7 +8,7 @@
             
             <!-- 質問を表示 -->
             @foreach($questions as $question)
-                <a href="/question_show/{{ $question->id }}" class="question_link">
+                <a href="/question/show/{{ $question->id }}" class="question_link">
                     <div class="question">
                         <h3 class="question_title">{{ $question->title }}</h3>
                     </div>

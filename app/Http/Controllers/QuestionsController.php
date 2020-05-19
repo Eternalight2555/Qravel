@@ -65,8 +65,8 @@ class QuestionsController extends Controller
     {
         // 質問をすべて取得
         $question = Question::find($question_id);
-        $create_user= Auth::id();
+        $show_user= Auth::id();
         
-        return view('questions/show',['question' => $question,'create_user'=>$create_user]);
+        return view('questions/show',['question' => $question,'show_user'=>$show_user]);
     }
 }
