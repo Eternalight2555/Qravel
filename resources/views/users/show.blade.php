@@ -22,7 +22,7 @@
             
             <!-- 自分の質問 -->
             @foreach($questions as $question)
-                <a href="/question_show/{{ $question->id }}" class="question_link">
+                <a href="/question/show/{{ $question->id }}" class="question_link">
                     <div class="question">
                         <h3 class="question_title">{{ $question->title }}</h3>
                     </div>
@@ -35,9 +35,13 @@
         <div class="user_answer_wrapper">
             
             <!-- 自分の解答 -->
-            <!--@foreach($answers as $answer)-->
-                
-            <!--@endforeach-->
+            @foreach($answers as $answer)
+                <a href="/question/show/{{ $question->id }}" class="question_link">
+                    <div class="question">
+                        <h3 class="question_title">{{ $question->title }}</h3>
+                    </div>
+                </a>
+            @endforeach
             
         </div>
     </div>
