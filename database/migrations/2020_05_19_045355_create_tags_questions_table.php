@@ -13,9 +13,14 @@ class CreateTagsQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags_questions', function (Blueprint $table) {
-            $table->integer('tags_id');
-            $table->integer('questions_id');
+        Schema::create('users_questions',function (Blueprint $table){
+            $table->unsignedInteger('users_id');
+            $table->unsignedInteger('questions_id');
+            $table->primary(['users_id','questions_id']);
+            
+            // 外部キー制約
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('questions_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 
