@@ -117,6 +117,14 @@ class QuestionsController extends Controller
     
     }
     
+    public function show($question_id)
+    {
+        // 質問をすべて取得
+        $question = Question::find($question_id);
+        $show_user= Auth::id();
+        
+        return view('questions/show',['question' => $question,'show_user'=>$show_user]);
+    }
     public function show_userpage(){
         
         // ユーザ番号を取得
