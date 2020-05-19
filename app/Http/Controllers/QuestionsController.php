@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
+use Auth;
+use Validator;
+
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
-    public function new($list_id)
+    public function new()
     {
-        if(!$this->validateList($list_id)){
-            return redirect()->back()->withErrors("それはあなたのリストではありません。")->withInput();
-        }
         return view('questions/new');
         // テンプレート「listing/new.blade.php」を表示します。
     }
@@ -57,5 +58,12 @@ class QuestionsController extends Controller
         
         // 「/」 ルートにリダイレクト
         return redirect('/');
+    }
+    public function index()
+    {
+        // 質問をすべて取得
+        $questions = Question::get();
+        
+        return view('questions/index',['questions' => $questions]);
     }
 }

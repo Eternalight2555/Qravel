@@ -14,8 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('newQuestion/','QuestionsController@new');
-Route::post('question/','QuestionsController@store');
+Route::group(['middleware'=>['auth']],function(){
+    Route::get('newQuestion/','QuestionsController@new');
+    Route::post('storeQuestion/','QuestionsController@store');
+});
+
+Route::get('/','QuestionsController@index');
+
 
 Auth::routes();
 
