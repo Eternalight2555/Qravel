@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Question;
 use App\Tag;
 use App\TagsQuestion;
+use App\User;
+use App\Answer;
 use Auth;
 use Validator;
 
@@ -113,5 +115,24 @@ class QuestionsController extends Controller
         // トップviewにデータを送る
         return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     
+    }
+    
+    public function show_userpage(){
+        
+        // ユーザ番号を取得
+        $user_id = Auth::user()->id;
+        
+        // Questionモデルを介してデータを取得
+        $questions = Question::where('user_id',$user_id)->get();
+        
+        // Answerモデルを介してデータを取得
+        $answers = Answer::where('user_id',$user_id)->get();
+        
+        // Userモデルを介してデータを取得
+        $user = User::find($user_id);
+        
+        // データをユーザ詳細画面に送る
+        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user]);
+        
     }
 }
