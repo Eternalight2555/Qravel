@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="top_wrapper">
-    <div class="contain">
+    <div class="content">
         <div class="ranking_wrapper">
             
             <!-- 質問を表示 -->
@@ -26,7 +26,7 @@
             
         </div>
     </div>
-    <div class="contain">
+    <div class="content">
         <div class="result_wrapper">
             
         </div>
