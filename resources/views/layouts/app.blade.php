@@ -21,10 +21,14 @@
     <!--JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{{secure_asset('js/jquery.multi-select.js')}}"></script>
+    <script src="{{secure_asset('js/jquery.quicksearch.js')}}"></script>
     
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/question_show.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/question_new.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/index.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/multi-select.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -34,7 +38,7 @@
       <nav class="nav">
         <ul class="header_menu">
           <li class="header_menu_title">
-              <a class="nav-link questionNew" href="/">Qravel</a>
+            <a class="nav-link questionNew" href="/">Qravel</a>
           </li>
           <li class="header_serch">
             <form action="" method="post">

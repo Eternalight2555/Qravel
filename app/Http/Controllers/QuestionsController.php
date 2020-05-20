@@ -115,7 +115,6 @@ class QuestionsController extends Controller
         
         // トップviewにデータを送る
         return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
-    
     }
     
     public function show($question_id)
