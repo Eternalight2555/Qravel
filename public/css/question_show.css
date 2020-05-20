@@ -1,6 +1,6 @@
 /* モーダルウィンドウのcss設定 */
 /* 一番上に表示させるdiv */
-#modal-content{
+#anser-content{
     display :none;
 	/* ボックスの重なりの順序を指定 */
 	z-index:2;
