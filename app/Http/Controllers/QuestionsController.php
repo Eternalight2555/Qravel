@@ -13,7 +13,7 @@ use Validator;
 use Illuminate\Http\Request;
 
 // 定義
-define('MAX','5');
+define('MAX','10');
 
 class QuestionsController extends Controller
 {
@@ -33,6 +33,7 @@ class QuestionsController extends Controller
                 'name.required' => 'タイトルを入力してください。',
                 'name.max'=>'タイトルは255文字以内で入力してください。',
                 'content.required'=>'内容を入力してください。',
+                'tags.required'=>'タグを選択してください。'
         ];
         //Validatorを使って入力された値のチェック(バリデーション)処理　（今回は256以上と空欄の場合エラーになります）
         $validator = Validator::make($request->all() , ['name' => 'required|max:256','content'=>['required', 
@@ -41,7 +42,7 @@ class QuestionsController extends Controller
                     $fail('メモは65535バイト以内で入力してください。(現在'.strlen($value).'バイト)');
                 }
             }
-        ]],$messages);
+        ],'tags'=>'required'],$messages);
         
         if ($validator->fails())
         {
@@ -58,7 +59,7 @@ class QuestionsController extends Controller
         $question->want_know_count=0;
         $question->save();
         
-        
+
         foreach($request->tags as $tagid){
             $q = new TagsQuestion;
             $q->tags_id = $tagid;
@@ -136,11 +137,17 @@ class QuestionsController extends Controller
         // Answerモデルを介してデータを取得
         $answers = Answer::where('user_id',$user_id)->get();
         
+        $answered_question = [];
+        
+        foreach($answers as $answer){
+            if($answer->parent_id == NULL) array_push($answered_question,Question::find($answer->Q_id));
+        }
+        
         // Userモデルを介してデータを取得
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user]);
+        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_question' => $answered_question]);
         
     }
     
