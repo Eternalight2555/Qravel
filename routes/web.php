@@ -16,10 +16,8 @@ Route::group(['middleware'=>['auth']],function(){
 });
 
 
-Route::get('/','QuestionsController@index');
-
 // ユーザ詳細画面表示用
-// Route::get('/','QuestionsController@show_userpage');
+Route::get('/user/show','QuestionsController@show_userpage');
 
 // ページ番号をクリックしたとき、ページ遷移
 Route::get('/ranking_page/{page_id}','QuestionsController@paging');

@@ -136,11 +136,17 @@ class QuestionsController extends Controller
         // Answerモデルを介してデータを取得
         $answers = Answer::where('user_id',$user_id)->get();
         
+        $answered_question = [];
+        
+        foreach($answers as $answer){
+            if($answer->parent_id == NULL) array_push($answered_question,Question::find($answer->Q_id));
+        }
+        
         // Userモデルを介してデータを取得
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user]);
+        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_question' => $answered_question]);
         
     }
     
