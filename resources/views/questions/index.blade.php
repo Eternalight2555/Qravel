@@ -26,11 +26,6 @@
             
         </div>
     </div>
-    <div class="content">
-        <div class="result_wrapper">
-            
-        </div>
-    </div>
 </div>
 
 
