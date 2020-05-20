@@ -43,7 +43,7 @@
           <li class="header_serch">
             <form action="" method="post">
             <input class="serch" type="search" name="search" placeholder="キーワードを入力">
-            <input type="submit" name="key_word" value="検索">
+            <button type="submit" name="key_word" value="検索"></button>
           </form>
           </li>
           <li class="header_menu_new">
