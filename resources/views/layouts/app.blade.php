@@ -37,8 +37,8 @@
               <a class="nav-link questionNew" href="/">Qravel</a>
           </li>
           <li class="header_serch">
-            <form action="cgi-bin/example.cgi" method="post">
-            <input type="search" name="search" placeholder="キーワードを入力">
+            <form action="" method="post">
+            <input class="serch" type="search" name="search" placeholder="キーワードを入力">
             <input type="submit" name="submit" value="検索">
           </form>
           </li>
@@ -74,8 +74,8 @@
               <a class="nav-link questionNew" href="/">Qravel</a>
           </li>
           <li class="header_serch">
-            <form action="cgi-bin/example.cgi" method="post">
-            <input type="search" name="search" placeholder="キーワードを入力">
+            <form action="" method="post">
+            <input class="serch" type="search" name="search" placeholder="キーワードを入力">
             <input type="submit" name="submit" value="検索">
           </form>
           </li>
