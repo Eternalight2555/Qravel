@@ -24,11 +24,10 @@ Route::get('/user/show','QuestionsController@show_userpage');
 // ページ番号をクリックしたとき、ページ遷移
 Route::get('/ranking_page/{page_id}','QuestionsController@paging');
 
-//ログイン画面を表示
-Route::get('/login','QuestionsController@login');
 
-//ユーザー登録画面を表示
-Route::get('/register','QuestionsController@register');
+//質問投稿画面を表示
+Route::get('/question/new','QuestionsController@question_new');
+
 
 
 //ユーザー詳細画面を表示

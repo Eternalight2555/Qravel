@@ -151,6 +151,7 @@ class QuestionsController extends Controller
         
     }
     
+
     // ここから検索機能
     public function search(Request $request){
         
@@ -258,6 +259,7 @@ class QuestionsController extends Controller
         return view('register');
     }
     //質問投稿画面に遷移
+
     public function question_new(){
         return view('questions/new');
     }
