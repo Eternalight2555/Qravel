@@ -4,7 +4,7 @@
 <!-- バリデーションエラーの場合に表示 --> 
 @include('common.errors')
   <!-- カード作成フォーム -->
-  <form action="{{ url('storeQuestion')}}" method="POST" class="form-horizontal" onsubmit="return false;">
+  <form action="{{ url('question/store')}}" method="POST" class="form-horizontal" onsubmit="return false;">
   {{csrf_field()}} 
     <div class="form-group container-fluid"> 
       <div class="row">

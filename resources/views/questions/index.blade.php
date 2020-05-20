@@ -4,31 +4,27 @@
 
 <div class="top_wrapper">
     <div class="content">
-        <div class="ranking_wrapper">
-            
+        <div class="ranking_wrapper container">
             <!-- 質問を表示 -->
-            @foreach($questions as $question)
-                <a href="/question/show/{{ $question->id }}" class="question_link">
-                    <div class="question">
-                        <h3 class="question_title">{{ $question->title }}</h3>
+              @foreach($questions as $question)
+                <div class="row">
+                    <div class="question col-sm-offset-2 col-sm-8">
+                        <a class="stretched-link" href="/question/show/{{ $question->id }}" class="question_link">
+                            <h3 class="question_title">{{ $question->title }}</h3>
+                        </a>
                     </div>
-                </a>
-            @endforeach
-            
+                </div>
+              @endforeach
+        </div>  
+        <div class="row text-center">
             <!-- ページリンクの表示 -->
-            @for($i = 1; $i <= $max_page; $i++)
+          @for($i = 1; $i <= $max_page; $i++)
                 @if($i == $page_id)
-                    {{ $page_id }}  
+                    <span class="btn btn-primary" role="button">{{ $page_id }}  </span>
                 @else
-                    <a href="/ranking_page/{{ $i }}">{{ $i }}  </a>
+                    <a class="btn" href="/ranking_page/{{ $i }}" role="button">{{ $i }}  </a>
                 @endif
-            @endfor
-            
-        </div>
-    </div>
-    <div class="content">
-        <div class="result_wrapper">
-            
+          @endfor
         </div>
     </div>
 </div>
