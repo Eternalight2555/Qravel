@@ -20,7 +20,7 @@ class QuestionsController extends Controller
     public function new()
     {
         $tags = Tag::get();
-        return view('questions/new',['tags'=>$tags]);
+        return view('/question/new',['tags'=>$tags]);
         // テンプレート「listing/new.blade.php」を表示します。
     }
     // ===ここまでカードを新規作成する処理の追加（フォームへの遷移）===
