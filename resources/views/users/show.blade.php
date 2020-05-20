@@ -7,6 +7,22 @@
         <div class="user_info_wrapper">
             
             <!-- ユーザ情報 -->
+            <div class="user_name">
+                <h3>ユーザ名</h3>
+                <p>{{ $user->name }}</p>
+            </div>
+            <div class="user_address">
+                <h3>メールアドレス</h3>
+                <p>{{ $user->email }}</p>
+            </div>
+            <div class="user_profile">
+                <h3>プロフィール</h3>
+                @if($user->profile == null)
+                    <p>{{ $user->profile }}</p>
+                @else
+                    <p>プロフィールなし</p>
+                @endif
+            </div>
             
         </div>
     </div>

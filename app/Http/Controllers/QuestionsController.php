@@ -117,6 +117,14 @@ class QuestionsController extends Controller
     
     }
     
+    public function show($question_id)
+    {
+        // 質問をすべて取得
+        $question = Question::find($question_id);
+        $show_user= Auth::id();
+        
+        return view('questions/show',['question' => $question,'show_user'=>$show_user]);
+    }
     public function show_userpage(){
         
         // ユーザ番号を取得
@@ -134,5 +142,22 @@ class QuestionsController extends Controller
         // データをユーザ詳細画面に送る
         return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user]);
         
+    }
+    
+    //ログイン画面に遷移
+    public function login(){
+        return view('login');
+    }
+    //登録画面に遷移
+    public function register(){
+        return view('register');
+    }
+    //質問投稿画面に遷移
+    public function question_new(){
+        return view('questions/new');
+    }
+    //ユーザー詳細画面に遷移
+    public function user_show(){
+        return view('users/show');
     }
 }

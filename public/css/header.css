@@ -1,0 +1,115 @@
+.header {
+  background: #DC143C;
+  padding: 20px;
+  z-index: 4;
+    /*position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;*/
+}
+.header .nav .header_menu {
+  display: flex;
+  width: 80%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .nav .header_menu li {
+  list-style: none;
+  color: #fff;
+}
+.header .nav .header_menu li a {
+  color: #fff;
+}
+.header .nav .header_menu_title {
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  font-weight: bold;
+}
+.header .nav .header_menu_inner {
+  display: flex;
+  padding: 0;
+  align-items: center;
+}
+.header .nav .header_menu_inner .listNew:after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f044";
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 20px;
+}
+.header .nav .header_menu_new{
+    width:300px;
+}
+.header .nav .header_menu_new .nav-link {
+    color: white;
+    font-weight: bold;
+    background: #00CC00;
+    text-align: center;
+    line-height:35px;
+    text-decoration: none;
+    display: inline-block;
+    height:35px;
+    width:130px;
+    border-radius: 5px;
+    position: absolute;
+    right: 150px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+.header .nav .header_menu_inner{
+    margin-right: 30px;
+    font-weight: bold;
+}
+
+.header .nav .header_menu_new .nav-link:hover{
+    background: #00AA00;
+    cursor: pointer;
+    text-decoration: none;
+}
+.header .nav .header_menu_inner .login:after{
+    content: "/";
+    
+    padding: 0 10px;
+}
+
+.header .nav .header_menu_inner .user-name {
+    text-decoration: none;
+    
+}
+
+
+@media(max-width: 850px){
+    .header .nav .header_menu {
+        width: 100%;
+    }
+    .header .nav .header_menu_title{
+        left: 10%;
+    }
+    .header .nav .header_menu_new .nav-link{
+        right: 20%;
+    }
+    .header .nav .header_menu_inner{
+        font-size: 1.2rem;
+        margin-right: 0;
+        
+    }
+    .header .nav .header_menu_inner .login:after{
+        padding: 0;
+    }
+    
+}
+@media(max-width: 440px){
+    .header .nav .header_menu_inner{
+        display: none;
+    }
+    .header .nav .header_menu_new .nav-link{
+        right: -20%;
+    }
+}
