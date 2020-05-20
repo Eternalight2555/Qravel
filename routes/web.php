@@ -34,6 +34,11 @@ Route::get('/register','QuestionsController@register');
 //ユーザー詳細画面を表示
 Route::get('/user/show','QuestionsController@user_show');
 
+// 検索ボタンを押したとき検索結果をトップページに表示
+Route::post('/search','QuestionsController@search');
+// 検索結果ページからのページング
+Route::get('/search/{key_word}/{page_id}','QuestionsController@search_paging');
+
 Auth::routes();
 
 Route::get('/question/show/{question_id}','QuestionsController@show');
