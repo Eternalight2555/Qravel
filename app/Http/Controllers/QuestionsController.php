@@ -123,7 +123,12 @@ class QuestionsController extends Controller
         $question = Question::find($question_id);
         $show_user= Auth::id();
         
-        return view('questions/show',['question' => $question,'show_user'=>$show_user]);
+        $answers = Answer::where('Q_id',$question_id)
+                    ->where('parent_id',null)
+                    ->orderBy('created_at', 'asc')
+                    ->get();
+        
+        return view('questions/show',['question' => $question,'show_user'=>$show_user,'answers'=>$answers]);
     }
     public function show_userpage(){
         
