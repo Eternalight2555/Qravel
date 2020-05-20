@@ -149,4 +149,21 @@ class QuestionsController extends Controller
         return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_question' => $answered_question]);
         
     }
+    
+    //ログイン画面に遷移
+    public function login(){
+        return view('login');
+    }
+    //登録画面に遷移
+    public function register(){
+        return view('register');
+    }
+    //質問投稿画面に遷移
+    public function question_new(){
+        return view('questions/new');
+    }
+    //ユーザー詳細画面に遷移
+    public function user_show(){
+        return view('users/show');
+    }
 }
