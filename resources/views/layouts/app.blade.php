@@ -34,12 +34,12 @@
               <a class="nav-link questionNew" href="/">Qravel</a>
           </li>
           <li class="header_menu_new">
-              <!--ログイン時は質問投稿画面に--><a class="nav-link questionNew" href="">質問する</a>　
+              <!--ログイン時は質問投稿画面に--><a class="nav-link questionNew" href="/question/new">質問する</a>　
           </li>
           <ul class="header_menu_inner">
               <!--ログイン時のView-->
               <li class>
-                  <a class="nav-link user-name" href="" onclick="">
+                  <a class="nav-link user-name" href="/user/show" onclick="">
                     ユーザーさん
                   </a>
               </li>
@@ -55,17 +55,17 @@
               <a class="nav-link questionNew" href="/">Qravel</a>
           </li>
           <li class="header_menu_new">
-              <!--未ログイン時はログイン画面に--><a class="nav-link questionNew" href="">質問する</a>
+              <!--未ログイン時はログイン画面に--><a class="nav-link questionNew" href="{{ route('login') }}">質問する</a>
           </li>
           <ul class="header_menu_inner">
               <!--未ログイン時のView-->
               <li class="login">
-                  <a class="nav-link" href="" onclick="">
+                  <a class="nav-link" href="{{ route('login') }}" onclick="">
                     ログイン
                   </a>
               </li>
               <li class="sign-up">
-                  <a class="nav-link" href="" onclick="">
+                  <a class="nav-link" href="{{ route('register') }}" onclick="">
                     会員登録
                   </a>
               </li>
