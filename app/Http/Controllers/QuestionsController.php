@@ -144,15 +144,7 @@ class QuestionsController extends Controller
         
     }
     
-    //ログイン画面に遷移
-    public function login(){
-        return view('login');
-    }
-    //登録画面に遷移
-    public function register(){
-        return view('register');
-    }
-    //質問投稿画面に遷移
+    //質問詳細画面へ
     public function question_new(){
         return view('questions/new');
     }
