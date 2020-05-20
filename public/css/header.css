@@ -2,10 +2,10 @@
   background: #DC143C;
   padding: 20px;
   z-index: 4;
-    position: fixed;
+    /*position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    right: 0;*/
 }
 .header .nav .header_menu {
   display: flex;
