@@ -13,7 +13,7 @@ use Validator;
 use Illuminate\Http\Request;
 
 // 定義
-define('MAX','5');
+define('MAX','10');
 
 class QuestionsController extends Controller
 {

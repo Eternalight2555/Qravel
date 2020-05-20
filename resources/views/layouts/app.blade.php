@@ -21,8 +21,10 @@
     <!--JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+    
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/question_show.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/index.css') }}" rel="stylesheet">
 
 </head>
 <body>
