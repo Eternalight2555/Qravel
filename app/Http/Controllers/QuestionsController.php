@@ -13,7 +13,7 @@ use Validator;
 use Illuminate\Http\Request;
 
 // 定義
-define('MAX','5');
+define('MAX','10');
 
 class QuestionsController extends Controller
 {
@@ -33,6 +33,7 @@ class QuestionsController extends Controller
                 'name.required' => 'タイトルを入力してください。',
                 'name.max'=>'タイトルは255文字以内で入力してください。',
                 'content.required'=>'内容を入力してください。',
+                'tags.required'=>'タグを選択してください。'
         ];
         //Validatorを使って入力された値のチェック(バリデーション)処理　（今回は256以上と空欄の場合エラーになります）
         $validator = Validator::make($request->all() , ['name' => 'required|max:256','content'=>['required', 
@@ -41,7 +42,7 @@ class QuestionsController extends Controller
                     $fail('メモは65535バイト以内で入力してください。(現在'.strlen($value).'バイト)');
                 }
             }
-        ]],$messages);
+        ],'tags'=>'required'],$messages);
         
         if ($validator->fails())
         {
@@ -58,7 +59,7 @@ class QuestionsController extends Controller
         $question->want_know_count=0;
         $question->save();
         
-        
+
         foreach($request->tags as $tagid){
             $q = new TagsQuestion;
             $q->tags_id = $tagid;
@@ -114,7 +115,6 @@ class QuestionsController extends Controller
         
         // トップviewにデータを送る
         return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
-    
     }
     
     public function show($question_id)
@@ -141,11 +141,116 @@ class QuestionsController extends Controller
         // Answerモデルを介してデータを取得
         $answers = Answer::where('user_id',$user_id)->get();
         
+        $answered_question = [];
+        
+        foreach($answers as $answer){
+            if($answer->parent_id == NULL) array_push($answered_question,Question::find($answer->Q_id));
+        }
+        
         // Userモデルを介してデータを取得
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user]);
+        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_question' => $answered_question]);
+        
+    }
+    
+
+    // ここから検索機能
+    public function search(Request $request){
+        
+        // 検索した文字列を取得する
+        $word = $request->key_word;
+        
+        // 質問全てを取得する
+        $questions = Question::get();
+        
+        // 条件にあうものを格納する配列
+        $searched = [];
+        
+        if($word != ''){
+            foreach($questions as $question){
+                
+                // タイトルか内容にワードが含まれていたら格納
+                if(strpos($question->title,$word) === false){
+                    if(strpos($question->content,$word) !== false){
+                        array_push($searched,$question);
+                    }
+                }else{
+                    array_push($searched,$question);
+                }
+                
+            }
+        }
+        
+        // ページの初期値
+        $page_id = 1;
+        // ページ数を取得
+        $max_page = ceil(count($searched)/MAX);
+        
+        // 開始地点と終了地点の質問idを取得
+        $end_id = $page_id * MAX;
+        $start_id = $end_id - MAX;
+        
+        // 配列の初期化
+        $questions = [];
+        
+        // 該当データの個数
+        $data_num = count($searched);
+        
+        // そのページの質問を取得
+        for($i = $start_id; $i < $end_id && $i < $data_num; $i++){
+            array_push($questions,$searched[$i]);
+        }
+        
+        return view('questions/search',['word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
+        
+    }
+    // ここまで検索機能
+    
+    // 検索画面のページング
+    public function search_paging($word,$page_id){
+        
+        // 質問全てを取得する
+        $questions = Question::get();
+        
+        // 条件にあうものを格納する配列
+        $searched = [];
+        
+        if($word != ''){
+            foreach($questions as $question){
+                
+                 // タイトルか内容にワードが含まれていたら格納
+                if(strpos($question->title,$word) === false){
+                    if(strpos($question->content,$word) !== false){
+                        array_push($searched,$question);
+                    }
+                }else{
+                    array_push($searched,$question);
+                }
+                
+            }
+        }
+        
+        // ページ数を取得
+        $max_page = ceil(count($searched)/MAX);
+        
+        // 開始地点と終了地点の質問idを取得
+        $end_id = $page_id * MAX;
+        $start_id = $end_id - MAX;
+        
+        // 配列の初期化
+        $questions = [];
+        
+        // 該当データの個数
+        $data_num = count($searched);
+        
+        // そのページの質問を取得
+        for($i = $start_id; $i < $end_id && $i < $data_num; $i++){
+            array_push($questions,$searched[$i]);
+        }
+        
+        return view('questions/search',['word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
         
     }
     
@@ -158,6 +263,7 @@ class QuestionsController extends Controller
         return view('register');
     }
     //質問投稿画面に遷移
+
     public function question_new(){
         return view('questions/new');
     }

@@ -21,31 +21,55 @@
     <!--JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+    <script src="{{secure_asset('js/jquery.multi-select.js')}}"></script>
+    <script src="{{secure_asset('js/jquery.quicksearch.js')}}"></script>
+    
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/question_show.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/question_new.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/index.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/multi-select.css') }}" rel="stylesheet">
 
 </head>
 <body>
     @if(Auth::check())<!--ログイン時-->
     <header class="header">
+      
       <nav class="nav">
         <ul class="header_menu">
           <li class="header_menu_title">
-              <a class="nav-link questionNew" href="/">Qravel</a>
+            <a class="nav-link questionNew" href="/">Qravel</a>
+          </li>
+          <li class="header_serch">
+            <form action="" method="post">
+            <input class="serch" type="search" name="search" placeholder="キーワードを入力">
+            <input type="submit" name="submit" value="検索">
+          </form>
           </li>
           <li class="header_menu_new">
               <!--ログイン時は質問投稿画面に--><a class="nav-link questionNew" href="/question/new">質問する</a>　
           </li>
+          
           <ul class="header_menu_inner">
               <!--ログイン時のView-->
-              <li class>
+              <li class="user">
                   <a class="nav-link user-name" href="/user/show" onclick="">
-                    ユーザーさん
+                    {{ Auth::user()->name }}さん
                   </a>
+              </li>
+              <li>
+                  <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                  ログアウト
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+                  </form>
               </li>
             </ul>
         </ul>
+        
       </nav>
+    
     </header>
     @else<!--未ログイン時-->
     <header class="header">
@@ -53,6 +77,12 @@
         <ul class="header_menu">
           <li class="header_menu_title">
               <a class="nav-link questionNew" href="/">Qravel</a>
+          </li>
+          <li class="header_serch">
+            <form action="" method="post">
+            <input class="serch" type="search" name="search" placeholder="キーワードを入力">
+            <input type="submit" name="submit" value="検索">
+          </form>
           </li>
           <li class="header_menu_new">
               <!--未ログイン時はログイン画面に--><a class="nav-link questionNew" href="{{ route('login') }}">質問する</a>
