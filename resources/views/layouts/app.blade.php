@@ -41,10 +41,11 @@
             <a class="nav-link questionNew" href="/">Qravel</a>
           </li>
           <li class="header_serch">
-            <form action="" method="post">
-            <input class="serch" type="search" name="search" placeholder="キーワードを入力">
-            <button type="submit" name="key_word" value="検索"></button>
-          </form>
+            <form action="/search" method="post">
+               {{ csrf_field() }}
+              <input class="search" type="search" name="key_word" placeholder="キーワードを入力">
+              <button type="submit" name="submit">検索</button>
+            </form>
           </li>
           <li class="header_menu_new">
               <!--ログイン時は質問投稿画面に--><a class="nav-link questionNew" href="/question/new">質問する</a>　
@@ -79,10 +80,11 @@
               <a class="nav-link questionNew" href="/">Qravel</a>
           </li>
           <li class="header_serch">
-            <form action="" method="post">
-            <input class="serch" type="search" name="search" placeholder="キーワードを入力">
-            <input type="submit" name="submit" value="検索">
-          </form>
+            <form action="/search" method="post">
+               {{ csrf_field() }}
+              <input class="search" type="search" name="key_word" placeholder="キーワードを入力">
+              <button type="submit" name="submit">検索</button>
+            </form>
           </li>
           <li class="header_menu_new">
               <!--未ログイン時はログイン画面に--><a class="nav-link questionNew" href="{{ route('login') }}">質問する</a>
