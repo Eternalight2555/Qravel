@@ -62,7 +62,7 @@ class QuestionsController extends Controller
                 array_push($tags,$t->id);
             }
         }
-        eval(\Psy\sh());
+        //eval(\Psy\sh());
         // 入力に問題がなければCardモデルを介して、タイトルとかをqテーブルに保存
         //eval(\Psy\sh());
         $question = new Question;
@@ -168,7 +168,7 @@ class QuestionsController extends Controller
             array_push($tagnames,$t->name);
         }
         //eval(\Psy\sh());
-        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'$reply_list'=>$reply_list]);
+        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
     }
     
     public function crear($question_id){
