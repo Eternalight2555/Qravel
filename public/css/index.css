@@ -1,12 +1,12 @@
-.question a {
-  color: #58acfa;
-}
 .top_wrapper .content .ranking_wrapper {
   margin-top: 90px;
 }
 .top_wrapper .content .ranking_wrapper .question {
   padding: 10px 10px 20px 10px;
   border-bottom: solid 1px #d0d0d0;
+}
+.top_wrapper .content .ranking_wrapper .question a {
+  color: #2e9afe;
 }
 .top_wrapper .content .ranking_wrapper .question .question_title {
   margin: 10px 0;
@@ -27,6 +27,11 @@
 }
 .top_wrapper .content .ranking_wrapper .question .question-tag {
   float: left;
+}
+.top_wrapper .content .ranking_wrapper .question .question-tag span {
+  color: #111;
+  font-weight: lighter;
+  background-color: #a9d0f5;
 }
 .top_wrapper .content .ranking_wrapper .question .questioner {
   text-align: right;

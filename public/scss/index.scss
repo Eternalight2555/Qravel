@@ -8,6 +8,9 @@
         padding:10px 10px 20px 10px;
         border-bottom:solid 1px lighten($border_color);
         
+        a{
+        color:$link_color;
+        }
         .question_title {
           margin: 10px 0;
         }
@@ -29,6 +32,11 @@
         }
         .question-tag {
           float: left;
+          span{
+            color:$base_font_color;
+            font-weight: lighter;
+            background-color: $tag_color;
+          }
         }
         .questioner {
           text-align: right;

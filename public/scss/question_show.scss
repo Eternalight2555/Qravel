@@ -8,9 +8,10 @@
         .question_title {
           margin: 10px 0;
           border-bottom:solid 1px lighten($border_color);
-          	
          }
-      
+      	.tag{
+          background:$tag_color;
+        }
     }
  }
 
