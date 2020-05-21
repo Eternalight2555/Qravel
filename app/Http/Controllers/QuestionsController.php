@@ -26,7 +26,7 @@ class QuestionsController extends Controller
         // テンプレート「listing/new.blade.php」を表示します。
     }
     // ===ここまでカードを新規作成する処理の追加（フォームへの遷移）===
-
+    
 
     // ===ここからカードを新規作成する処理の追加（データベースへの保存）===
     public function store(Request $request)
@@ -112,14 +112,25 @@ class QuestionsController extends Controller
         // 配列の初期化
         $questions = [];
         
+        $questionstags=[];
         // そのページの質問を取得
         for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
 
             array_push($questions,Question::find($i));
+            
+            $tags = TagsQuestion::where('questions_id', $i)
+            ->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$i]=$tagnames;
         }
-        
+        //eval(\Psy\sh());
         // トップviewにデータを送る
-        return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
+        return view('questions/index',['tagnames'=>$questionstags,'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     }
     
     public function paging($page_id){
