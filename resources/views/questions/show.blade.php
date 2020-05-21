@@ -64,7 +64,7 @@
                 if($question->clear_flag==true){ ?>ｘ
                     
             <?php }else if($show_user==$question->user_id){ ?>
-                    <a href="'.$url.'"class="Btn">編集する</a>
+                    <a href="/" class="Btn">編集する</a>
             <?php }else if($show_user==null){?>
                     <a href={{ route('login') }}>
                         ログインして回答する
@@ -97,11 +97,11 @@
             </div>
             <div>
                 <span>役に立ったと思った人：{{$answer->good_count}}<br></span>
-                <a onclick="return confirm('この回答を評価しますか？')" href="{{ url('/good', $answer->id)  }}">役に立った</a>
+                <a onclick="return confirm('この回答を評価しますか？')" href="/">役に立った</a>
             </div>
             
             <?php if($show_user==$answer->user_id): ?>
-                <a href="{{ url('/answeredit', $question->id) }}"class="Btn">回答を編集する</a>
+                <a href="/"class="Btn">回答を編集する</a>
             <?php endif; ?>
             <details class="reply_form_content">
                 <summary>この回答に対する返信</summary>
