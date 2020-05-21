@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('user_id');
             $table->boolean('crear_flag');
             $table->string('title');
-            $table->string('content');
+            $table->text('content');
             $table->integer('want_know_count');
             $table->timestamps();
         });

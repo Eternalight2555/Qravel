@@ -65,11 +65,10 @@ document.getElementById("modal-overlay").style.display = "block";
         
         <div class="text-center">
             <?php
-                if($question->crear_flag==true){ ?>
-                    <p>この質問は解決しました</p>
+                if($question->clear_flag==true){ ?>ｘ
+                    
             <?php }else if($show_user==$question->user_id){ ?>
-                    <a href="{{ url('/question/edit', $question->id) }}" class="Btn">編集する</a><br>
-                    <a href="{{ url('/question/crear', $question->id) }}"class="Btn">この質問を解決済みにする</a>
+                    <a href="'.$url.'"class="Btn">編集する</a>
             <?php }else if($show_user==null){?>
                     <a href={{ route('login') }}>
                         ログインして回答する
@@ -92,6 +91,7 @@ document.getElementById("modal-overlay").style.display = "block";
         <?php else: ?>
             <p>回答 {{count($answers)}} 件</p>
         <?php endif; ?>
+
         @foreach ($answers as $answer) 
             <div class="form-group">
                 <p>ユーザー名<br>{{$answer_users[$i]}}</p>
@@ -109,7 +109,7 @@ document.getElementById("modal-overlay").style.display = "block";
                 <summary>この回答に対する返信</summary>
                 @foreach ($reply_list[$i] as $reply)
                     <div class="form-group">
-                        <p>返信内容<br>{{$reply->content}}</p>
+                        <p>回答内容<br>{{$reply->content}}</p>
                     </div>
                 @endforeach
                     <?php if($question->clear_flag==true): ?>
