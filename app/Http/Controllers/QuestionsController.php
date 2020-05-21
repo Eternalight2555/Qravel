@@ -164,7 +164,7 @@ class QuestionsController extends Controller
     public function search(Request $request){
         
         // 検索した文字列を取得する
-        $word = $request->key_word;
+        $word = strtolower($request->key_word);
         
         // 質問全てを取得する
         $questions = Question::get();
@@ -176,8 +176,8 @@ class QuestionsController extends Controller
             foreach($questions as $question){
                 
                 // タイトルか内容にワードが含まれていたら格納
-                if(strpos($question->title,$word) === false){
-                    if(strpos($question->content,$word) !== false){
+                if(strpos(strtolower($question->title),$word) === false){
+                    if(strpos(strtolower($question->content),$word) !== false){
                         array_push($searched,$question);
                     }
                 }else{
@@ -186,6 +186,7 @@ class QuestionsController extends Controller
                 
             }
         }
+        
         
         // ページの初期値
         $page_id = 1;
