@@ -25,10 +25,7 @@ class QuestionsController extends Controller
         return view('questions/new',['tags'=>$tags]);
         // テンプレート「listing/new.blade.php」を表示します。
     }
-    // ===ここまでカードを新規作成する処理の追加（フォームへの遷移）===
-    
 
-    // ===ここからカードを新規作成する処理の追加（データベースへの保存）===
     public function store(Request $request)
     {
         $messages = [
@@ -95,7 +92,8 @@ class QuestionsController extends Controller
         return redirect('/');
     }
     
-    public function index(){
+    public function index()
+    {
 
         // ページの初期値
         $page_id = 1;
@@ -127,13 +125,15 @@ class QuestionsController extends Controller
                 array_push($tagnames,$t->name);
             }
             $questionstags[$i]=$tagnames;
+
         }
         //eval(\Psy\sh());
         // トップviewにデータを送る
         return view('questions/index',['tagnames'=>$questionstags,'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     }
     
-    public function paging($page_id){
+    public function paging($page_id)
+    {
         
         // ページ数を取得
         $questions = Question::get();
@@ -154,6 +154,7 @@ class QuestionsController extends Controller
         // トップviewにデータを送る
         return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     }
+    
     
     public function show($question_id)
     {
@@ -187,10 +188,27 @@ class QuestionsController extends Controller
             array_push($tagnames,$t->name);
         }
         //eval(\Psy\sh());
+        
         return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
     }
     
-    public function crear($question_id){
+    public function bookmark($question_id)
+    {
+        // 既にブックマークされているかを判断する
+        $target = User_Question::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        if ($target !== undefined){
+            $target->delete();
+        }else{
+            $bookmark = new User_Question;
+            $bookmark->user_id = Auth::user()->id;
+            $bookmark->questions_id = $question_id;
+        }
+        
+        return redirect('/question/show/'.$question_id);
+    }
+    
+    public function crear($question_id)
+    {
         $question = Question::find($question_id);
         $question->crear_flag=true;
         $question->save();
@@ -198,8 +216,10 @@ class QuestionsController extends Controller
         return redirect('/question/show/'.$question_id);
     }
     
-    public function show_userpage(){
-        
+
+    public function show_userpage()
+    {
+
         // ユーザ番号を取得
         $user_id = Auth::user()->id;
         
@@ -222,10 +242,10 @@ class QuestionsController extends Controller
         return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions]);
         
     }
-    
 
     // ここから検索機能
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         
         // 検索した文字列を取得する
         $word = strtolower($request->key_word);
@@ -286,7 +306,8 @@ class QuestionsController extends Controller
     // ここまで検索機能
     
     // 検索画面のページング
-    public function search_paging($word,$page_id){
+    public function search_paging($word,$page_id)
+    {
         
         // 質問全てを取得する
         $questions = Question::get();
@@ -332,20 +353,19 @@ class QuestionsController extends Controller
     }
     
     //ログイン画面に遷移
-    public function login(){
+    public function login()
+    {
         return view('login');
     }
     //登録画面に遷移
-    public function register(){
+    public function register()
+    {
         return view('register');
     }
     //質問投稿画面に遷移
 
-    public function question_new(){
+    public function question_new()
+    {
         return view('questions/new');
-    }
-    //ユーザー詳細画面に遷移
-    public function user_show(){
-        return view('users/show');
     }
 }
