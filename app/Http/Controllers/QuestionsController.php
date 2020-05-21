@@ -169,17 +169,17 @@ class QuestionsController extends Controller
         // Answerモデルを介してデータを取得
         $answers = Answer::where('user_id',$user_id)->get();
         
-        $answered_question = [];
+        $answered_questions = [];
         
         foreach($answers as $answer){
-            if($answer->parent_id == NULL) array_push($answered_question,Question::find($answer->Q_id));
+            if($answer->parent_id == NULL) array_push($answered_questions,Question::find($answer->Q_id));
         }
         
         // Userモデルを介してデータを取得
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_question' => $answered_question]);
+        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions]);
         
     }
     
@@ -189,6 +189,14 @@ class QuestionsController extends Controller
         
         // 検索した文字列を取得する
         $word = strtolower($request->key_word);
+        
+        // 全角スペースを半角スペースに変換
+        $check = mb_convert_kana($word, 's');
+        // スペースを含むときエラーとする
+        if(strpos($check," ") !== false){
+            return redirect()->back();
+            
+        }
         
         // 質問全てを取得する
         $questions = Question::get();
