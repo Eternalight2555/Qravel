@@ -45,7 +45,7 @@ Route::get('/question/show/{question_id}','QuestionsController@show');
 Route::get('/', 'QuestionsController@index')->name('home');
 
 Route::post('/answer/new/{question_id}', 'AnswersController@store');
-
+Route::post('/reply/new/{answer_id}', 'AnswersController@replystore');
 
 Route::get('/home', 'QuestionsController@index')->name('home');
 
