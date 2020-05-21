@@ -31,7 +31,7 @@ Route::get('/question/new','QuestionsController@question_new');
 
 
 //ユーザー詳細画面を表示
-Route::get('/user/show','QuestionsController@user_show');
+Route::get('/users/show','QuestionsController@user_show');
 
 // 検索ボタンを押したとき検索結果をトップページに表示
 Route::post('/search','QuestionsController@search');

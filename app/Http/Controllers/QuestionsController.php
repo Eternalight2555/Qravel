@@ -87,7 +87,7 @@ class QuestionsController extends Controller
         $questions = [];
         
         // そのページの質問を取得
-        for($i = $start_id; $i <= $end_id; $i++){
+        for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
             array_push($questions,Question::find($i));
         }
         
