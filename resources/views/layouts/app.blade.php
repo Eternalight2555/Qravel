@@ -28,7 +28,13 @@
     <link href="{{ secure_asset('css/question_new.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/index.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/multi-select.css') }}" rel="stylesheet">
+
     <link href="{{ secure_asset('css/user_show.css') }}" rel="stylesheet">
+
+    <link href="{{ secure_asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/register.css') }}" rel="stylesheet">
+
+
 </head>
 <body>
     @if(Auth::check())<!--ログイン時-->

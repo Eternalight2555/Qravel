@@ -12,13 +12,14 @@
                         <a class="stretched-link" href="/question/show/{{ optional($question)->id }}" class="question_link">
                             <h3 class="question_title">{{ optional($question)->title }}</h3>
                         </a>
+                        
                         <div class="question-status"><p>受付中</p></div>
                         <div class="question-tag">
                             @foreach ($tagnames[$question->id] as $tagname) 
                                 <span>{{ $tagname }}</span>
                             @endforeach
                         </div>
-                        <div class="questioner">ユーザーネーム</div>
+                        <div class="questioner">{{$usernames[$question->id]}}</div>
                     </div>
                 </div>
               @endforeach
