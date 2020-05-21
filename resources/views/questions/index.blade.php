@@ -12,6 +12,9 @@
                         <a class="stretched-link" href="/question/show/{{ optional($question)->id }}" class="question_link">
                             <h3 class="question_title">{{ optional($question)->title }}</h3>
                         </a>
+                        <div class="question-status"><p>受付中</p></div>
+                        <div class="question-tag">ここにタグを表示</div>
+                        <div class="questioner">ユーザーネーム</div>
                     </div>
                 </div>
               @endforeach
