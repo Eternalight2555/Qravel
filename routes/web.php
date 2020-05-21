@@ -13,7 +13,7 @@
 //ログインしている場合のみ
 Route::group(['middleware'=>['auth']],function(){
     //質問投稿画面を表示
-    Route::get('/question/new','QuestionsController@new');
+    Route::get('newQuestion','QuestionsController@new');
     Route::post('/question/store','QuestionsController@store');
 });
 
