@@ -16,6 +16,7 @@ class CreateUsersQuestionsTable extends Migration
         Schema::create('users_questions', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('questions_id');
+            $table->integer('delete_trigger')->default(0);
             $table->timestamps();
         });
     }
