@@ -158,13 +158,32 @@ class QuestionsController extends Controller
             $ans_user=User::find($answer->user_id);
             array_push($answer_users,$ans_user->name);
         }
-        
-        return view('questions/show',['question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
+        //$tagids = TagsQuestion::where('questions_id',$question_id)->get();
+        $tags = TagsQuestion::where('questions_id', $question_id)
+            ->get();
+        $tagnames=[];
+        foreach($tags as $tag){
+            $t = Tag::where("id",$tag->tags_id)->first();
+            //eval(\Psy\sh());
+            array_push($tagnames,$t->name);
+        }
+        //eval(\Psy\sh());
+        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'$reply_list'=>$reply_list]);
     }
     
+    public function crear($question_id)
+    {
+        $question = Question::find($question_id);
+        $question->crear_flag=true;
+        $question->save();
+        
+        return redirect('/question/show/'.$question_id);
+    }
+    
+
     public function show_userpage()
     {
-        
+
         // ユーザ番号を取得
         $user_id = Auth::user()->id;
         
@@ -312,10 +331,5 @@ class QuestionsController extends Controller
     public function question_new()
     {
         return view('questions/new');
-    }
-    //ユーザー詳細画面に遷移
-    public function user_show()
-    {
-        return view('users/show');
     }
 }
