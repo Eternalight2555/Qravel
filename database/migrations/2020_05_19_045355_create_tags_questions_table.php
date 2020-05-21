@@ -15,12 +15,12 @@ class CreateTagsQuestionsTable extends Migration
     {
 
         Schema::create('tags_questions',function (Blueprint $table){
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('tags_id');
             $table->unsignedInteger('questions_id');
-            $table->primary(['user_id','questions_id']);
-            
+            $table->primary(['tags_id','questions_id']);
+            $table->timestamps();
             // 外部キー制約
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('tags_id')->references('id')->on('tags')->onDelete('cascade');
             $table->foreign('questions_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
