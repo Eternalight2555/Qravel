@@ -93,7 +93,7 @@ document.getElementById("modal-overlay").style.display = "block";
                         <a href="{{ url('/answeredit', $question->id) }}"class="Btn">回答を編集する</a>
                     <?php endif; ?>
                     <?php if($show_user==null): ?>
-                        <a href="/">
+                        <a href={{ route('login') }}>
                             ログインして返信する
                         </a> 
                     <?php endif;?>

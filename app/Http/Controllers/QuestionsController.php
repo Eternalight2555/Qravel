@@ -147,7 +147,16 @@ class QuestionsController extends Controller
                     ->orderBy('created_at', 'asc')
                     ->get();
         
-        return view('questions/show',['question' => $question,'show_user'=>$show_user,'answers'=>$answers]);
+        $reply_list=[];
+        
+        foreach($answers as $answer){
+            $temp=Answer::where('parent_id',$answer->id)
+                    ->orderBy('created_at', 'asc')
+                    ->get();
+            array_push($reply_list,$temp);
+        }
+        
+        return view('questions/show',['question' => $question,'show_user'=>$show_user,'answers'=>$answers,'$reply_list'=>$reply_list]);
     }
     public function show_userpage(){
         
