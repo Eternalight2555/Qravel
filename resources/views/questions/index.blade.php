@@ -13,7 +13,11 @@
                             <h3 class="question_title">{{ optional($question)->title }}</h3>
                         </a>
                         <div class="question-status"><p>受付中</p></div>
-                        <div class="question-tag">ここにタグを表示</div>
+                        <div class="question-tag">
+                            @foreach ($tagnames[$question->id] as $tagname) 
+                                <span>{{ $tagname }}</span>
+                            @endforeach
+                        </div>
                         <div class="questioner">ユーザーネーム</div>
                     </div>
                 </div>

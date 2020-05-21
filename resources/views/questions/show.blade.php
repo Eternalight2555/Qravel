@@ -60,7 +60,7 @@ document.getElementById("modal-overlay").style.display = "block";
         
         <div class="text-center">
             <?php
-                if($question->clear_flag==true){ ?>
+                if($question->clear_flag==true){ ?>ｘ
                     
             <?php }else if($show_user==$question->user_id){ ?>
                     <a href="'.$url.'"class="Btn">編集する</a>
