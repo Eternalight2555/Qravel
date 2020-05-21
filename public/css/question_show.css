@@ -1,7 +1,11 @@
+
 /* モーダルウィンドウのcss設定 */.question a {
   color: #1a0dab;
 }
+
+
 .questionShowPage {
+
   margin-top: 60px;
 }
 .questionShowPage .content {
@@ -10,6 +14,9 @@
 .questionShowPage .content .question_title {
   margin: 10px 0;
   border-bottom: solid 1px #d0d0d0;
+}
+.questionShowPage .content .tag {
+  background: #a9d0f5;
 }
 /* 一番上に表示させるdiv */#anser-content {
   display : none;

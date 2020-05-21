@@ -150,14 +150,28 @@ class QuestionsController extends Controller
         
         // 配列の初期化
         $questions = [];
+        $questionstags=[];
         
+        $questionsuser=[];
         // そのページの質問を取得
         for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
-            array_push($questions,Question::find($i));
+            $q = Question::find($i);
+            array_push($questions,$q);
+            
+            $tags = TagsQuestion::where('questions_id', $i)
+            ->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$q->id]=$tagnames;
+            $questionsuser[$q->id]=User::find($q->user_id)->name;
         }
         
         // トップviewにデータを送る
-        return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
+        return view('questions/index',['tagnames'=>$questionstags,'usernames'=>$questionsuser,'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     }
     
     
@@ -194,19 +208,29 @@ class QuestionsController extends Controller
         }
         //eval(\Psy\sh());
         
-        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
+        // ブックマークしているかを判断する
+        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        
+        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users,'target' => $target]);
     }
     
     public function bookmark($question_id)
     {
         // 既にブックマークされているかを判断する
         $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
-        if ($target != null){
-            $target->delete();
-        }else{
+        if ($target == null){
             $bookmark = new UsersQuestion;
             $bookmark->user_id = Auth::user()->id;
             $bookmark->questions_id = $question_id;
+            $bookmark->save();
+        }else{
+            if($target->delete_trigger == 0){
+                $target->delete_trigger = 1;
+                $target->save();
+            }else{
+                $target->delete_trigger = 0;
+                $target->save();
+            }
         }
         return redirect('/question/show/'.$question_id);
     }
