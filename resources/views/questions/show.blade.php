@@ -96,7 +96,7 @@
                 <p>{{$answer->content}}</p>
             </div>
             <div>
-                <span>役に立ったと思った人：{{$answer->good_count}}</span>
+                <span>役に立ったと思った人：{{$answer->good_count}}<br></span>
                 <a onclick="return confirm('この回答を評価しますか？')" href="{{ url('/good', $answer->id)  }}">役に立った</a>
             </div>
             

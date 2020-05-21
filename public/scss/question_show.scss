@@ -26,7 +26,15 @@
         	padding: 5px;
         	border:solid 1px lighten($border_color);
         }
-        
+        .reply_form_content{
+        	margin-top: 5%;
+        	margin-bottom: 5%;
+        	
+        	form{
+        		margin-top: 5%;
+        		margin-bottom: 5%;
+        	}
+        }
         .answer_form_content{
         	padding-left: 5%;
         	border-bottom:solid 1px lighten($border_color);
