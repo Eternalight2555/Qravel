@@ -158,8 +158,17 @@ class QuestionsController extends Controller
             $ans_user=User::find($answer->user_id);
             array_push($answer_users,$ans_user->name);
         }
-        
-        return view('questions/show',['question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
+        //$tagids = TagsQuestion::where('questions_id',$question_id)->get();
+        $tags = TagsQuestion::where('questions_id', $question_id)
+            ->get();
+        $tagnames=[];
+        foreach($tags as $tag){
+            $t = Tag::where("id",$tag->tags_id)->first();
+            //eval(\Psy\sh());
+            array_push($tagnames,$t->name);
+        }
+        //eval(\Psy\sh());
+        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'$reply_list'=>$reply_list]);
     }
     
     public function crear($question_id){

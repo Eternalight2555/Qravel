@@ -51,6 +51,11 @@ document.getElementById("modal-overlay").style.display = "block";
         </div>
         <div class="form-group">
             タグ名：
+            <p>
+            @foreach ($tagnames as $tagname) 
+                <span>{{ $tagname }}</span>
+            @endforeach
+            </p>
         </div>
         
         <div class="text-center">
