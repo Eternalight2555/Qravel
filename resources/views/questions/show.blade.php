@@ -55,23 +55,19 @@ document.getElementById("modal-overlay").style.display = "block";
         
         <div class="text-center">
             <?php
-                if($question->clear_flag==true){
+                if($question->clear_flag==true){ ?>
                     
-                }else if($show_user==$question->user_id){
-                    $url = url('/questionedit', $question->id);
-                    $html = '<a href="'.$url.'"class="Btn">編集する</a>';
-                }else if($show_user==null){
-                    $html = '<a href="/">
-                                ログインして回答する
-                            </a> ';
-                }else{
-                    $url = url('/answer/new', $question->id);
-                    $html = '<button type="button" onclick="anser_onclick_open();">
-                                回答する
-                            </button> ';
-                }
-                print $html;
-            ?>
+            <?php }else if($show_user==$question->user_id){ ?>
+                    <a href="'.$url.'"class="Btn">編集する</a>
+            <?php }else if($show_user==null){?>
+                    <a href={{ route('login') }}>
+                        ログインして回答する
+                    </a> 
+            <?php }else{ ?>
+                <button type="button" onclick="anser_onclick_open();">
+                    回答する
+                </button> 
+            <?php }    ?>
         </div>
     </div>
     
@@ -113,23 +109,10 @@ document.getElementById("modal-overlay").style.display = "block";
                                 <button type="submit" class="createBtn"> 返信する </button> 
                             </div>
                             <input type="hidden" name="q_id" value="{{ old('q_id', $question->id) }}">
+                            <input type="hidden" name="parent_id" value="{{ old('parent_id', $answer->id) }}">
                         </form>
                     </div>
                     
-                                    <!-- 返信用　 -->
-                <!-- <div id="reply-content">
-                    <form action= "{{ url('/answer/new', $answer->id) }}" method="POST" class="form-horizontal">
-                          {{csrf_field()}} 
-                    <div class="form-group"> 
-                      <label>回答内容</label> 
-                      <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{ old('memo') }}</textarea>
-                    </div>
-                    <div class="text-center"> 
-                        <button type="submit" class="createBtn"> 作成する </button> 
-                    </div>
-                    <input type="hidden" name="q_id" value="{{ old('q_id', $question->id) }}">
-                  </form>
-                </div> -->
             </details>
         @endforeach
     </div>
