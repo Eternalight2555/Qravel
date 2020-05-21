@@ -54,7 +54,7 @@
             
             <h2>回答した質問</h2>
             <!-- 自分の解答 -->
-            @foreach($answers as $answer)
+            @foreach($answered_questions as $answered_question)
                 <a href="/question/show/{{ $answered_question->id }}" class="question_link">
                     <div class="question">
                         <h3 class="question_title">{{ $answered_question->title }}</h3>
