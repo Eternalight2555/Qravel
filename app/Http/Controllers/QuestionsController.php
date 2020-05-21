@@ -155,8 +155,15 @@ class QuestionsController extends Controller
                     ->get();
             array_push($reply_list,$temp);
         }
-        
-        return view('questions/show',['question' => $question,'show_user'=>$show_user,'answers'=>$answers,'$reply_list'=>$reply_list]);
+        $tagids = TagsQuestion::where('questions_id',$question_id)->get();
+        $tags=[];
+        foreach($tagids as $tagid){
+            $tag = Tag::where("id",$tagid)->get();
+            array_push($tags,$tag);
+            //eval(\Psy\sh());
+        }
+        eval(\Psy\sh());
+        return view('questions/show',['tags'=>$tags,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'$reply_list'=>$reply_list]);
     }
     public function show_userpage(){
         
