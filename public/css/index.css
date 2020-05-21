@@ -8,7 +8,7 @@
 .top_wrapper .content .ranking_wrapper .question .question_title {
   margin: 10px 0;
 }
-.top_wrapper .content .ranking_wrapper .question .question-status {
+.top_wrapper .content .ranking_wrapper .question .question-status #end {
   background-color: #696969;
   width: 50px;
   text-align: center;
