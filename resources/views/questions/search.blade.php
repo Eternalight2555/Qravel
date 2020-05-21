@@ -20,8 +20,14 @@
                                     <h3 class="question_title">{{ $question->title }}</h3>
                             </a>
                         </div>
-                        <div class="question-status"><p>受付中</p></div>
-                        <div class="question-tag">HTML</div>
+                        <div class="question-status">
+                            <?php if($question->crear_flag){ ?>
+                            <p id="end">回答済</p>
+                            <?php }else{ ?>
+                            <p id="noend">受付中</p>
+                            <?php } ?>
+                        </div>
+                        <div class="question-tag">タグ</div>
                         <div class="questioner">ユーザー</div>
                     </div>
                     @endforeach
@@ -30,7 +36,7 @@
                     <!-- ページリンクの表示 -->
                         @for($i = 1; $i <= $max_page; $i++)
                             @if($i == $page_id)
-                                <span class="btn btn-primary" role="button">{{ $page_id }}  </span>
+                                <span class="btn btn-primary" role="button">{{ $page_id }}</span>
                             @else
                                 <a class="btn" href="/search/{{ $word }}/{{ $i }}" role="button">{{ $i }}  </a>
                             @endif
