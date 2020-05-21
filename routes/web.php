@@ -36,6 +36,7 @@ Route::get('/search/{key_word}/{page_id}','QuestionsController@search_paging');
 Auth::routes();
 
 Route::get('/question/show/{question_id}','QuestionsController@show');
+Route::get('/question/crear/{question_id}','QuestionsController@crear');
 
 Route::get('/', 'QuestionsController@index')->name('home');
 
