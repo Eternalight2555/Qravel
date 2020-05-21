@@ -1,11 +1,9 @@
+@import 'variables';
 .panel-body{
-    margin-top:60px;
+    margin-top:$header_height;
     .form-group{
         .row{
             margin:20px 0;
-        }
-        .taglist{
-            padding-left:23%;
         }
     }
 }

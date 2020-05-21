@@ -31,6 +31,10 @@
            @endforeach
           </select>
         </div>
+        <label for="carding" class="col-sm-offset-2 col-sm-8 tag">上にないタグは追加してどうぞ（カンマとかスペース区切りでタグ名を入力）</label>
+        <div class="col-sm-offset-2 col-sm-8"> 
+          <input type="text" name="ninitags" class="form-control" value="{{ old('ninitag') }}">
+        </div>
       </div>
       <div class="col-sm-offset-5 col-sm-2 text-center button"> 
         <button type="submit" class="btn btn-success" onclick="submit();">
