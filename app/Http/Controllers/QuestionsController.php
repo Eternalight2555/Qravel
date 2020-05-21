@@ -148,15 +148,18 @@ class QuestionsController extends Controller
                     ->get();
         
         $reply_list=[];
+        $answer_users=[];
         
         foreach($answers as $answer){
             $temp=Answer::where('parent_id',$answer->id)
                     ->orderBy('created_at', 'asc')
                     ->get();
             array_push($reply_list,$temp);
+            $ans_user=User::find($answer->user_id);
+            array_push($answer_users,$ans_user->name);
         }
         
-        return view('questions/show',['question' => $question,'show_user'=>$show_user,'answers'=>$answers,'$reply_list'=>$reply_list]);
+        return view('questions/show',['question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
     }
     public function show_userpage(){
         
