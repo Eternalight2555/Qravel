@@ -58,7 +58,7 @@ document.getElementById("modal-overlay").style.display = "block";
             タグ名：
             <p>
             @foreach ($tagnames as $tagname) 
-                <span>{{ $tagname }}</span>
+                <span class="badge badge-secondary tag">{{ $tagname }}</span>
             @endforeach
             </p>
         </div>

@@ -20,6 +20,9 @@
         }
         .question-tag {
           float: left;
+          span{
+            background-color: $tag_color;
+          }
         }
         .questioner {
           text-align: right;
