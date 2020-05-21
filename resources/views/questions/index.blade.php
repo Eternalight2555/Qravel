@@ -22,7 +22,7 @@
                         </div>
                         <div class="question-tag">
                             @foreach ($tagnames[$question->id] as $tagname) 
-                                <span>{{ $tagname }}</span>
+                                <span class="badge badge-pill badge-primary">{{ $tagname }}</span>
                             @endforeach
                         </div>
                         <div class="questioner">{{$usernames[$question->id]}}</div>

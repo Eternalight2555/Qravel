@@ -21,6 +21,9 @@
 .top_wrapper .content .ranking_wrapper .question .question-tag {
   float: left;
 }
+.top_wrapper .content .ranking_wrapper .question .question-tag span {
+  background-color: #337ab7;
+}
 .top_wrapper .content .ranking_wrapper .question .questioner {
   text-align: right;
 }
