@@ -1,9 +1,8 @@
-
 /* モーダルウィンドウのcss設定 */.question a {
   color: #1a0dab;
 }
-.questionShowPage .content .ranking_wrapper {
-  margin-top: 90px;
+.questionShowPage {
+  margin-top: 60px;
 }
 .questionShowPage .content {
   margin-top: 30px;

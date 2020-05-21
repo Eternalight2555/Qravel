@@ -1,0 +1,31 @@
+.question a {
+  color: #1a0dab;
+}
+.top_wrappe .content .search_wrapper {
+  margin-top: 90px;
+}
+.top_wrappe .content .search_wrapper .serch_question {
+  padding: 10px 10px 20px 10px;
+  border-bottom: solid 1px #d0d0d0;
+}
+.top_wrappe .content .search_wrapper .question-status {
+  background-color: #696969;
+  width: 50px;
+  text-align: center;
+  border-radius: 4px;
+  color: #f4f5f7;
+  float: left;
+  margin-right: 20px;
+}
+.top_wrappe .content .search_wrapper .question-status p {
+  margin: 0;
+}
+.top_wrappe .content .search_wrapper .question-tag {
+  float: left;
+}
+.top_wrappe .content .search_wrapper .questioner {
+  text-align: right;
+}
+.top_wrappe .content .search_wrapper .page_btn {
+  margin-top: 20px;
+}

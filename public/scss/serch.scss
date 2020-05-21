@@ -1,0 +1,37 @@
+@import 'variables';
+.top_wrappe {
+    .content {
+        .search_wrapper{
+            margin-top:$header_height+30px;
+            .serch_question {
+                padding:10px 10px 20px 10px;
+                border-bottom:solid 1px lighten($border_color);
+            }
+            .question_title {
+                
+            }
+            .question-status {
+                background-color: $status_color;
+                width: 50px;
+                text-align: center;
+                border-radius: 4px;
+                color: $bg_color;
+                float: left;
+                margin-right: 20px;
+                
+                p {
+                    margin: 0;
+                }
+            }
+            .question-tag {
+                float: left;
+            }
+            .questioner {
+                text-align: right;
+            }
+            .page_btn {
+                margin-top: 20px;
+            }
+        }
+    }
+}
