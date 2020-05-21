@@ -2,6 +2,7 @@
 .top_wrapper{
   .content{
     .ranking_wrapper{
+      margin-top:$header_height;
       .question{
         padding-bottom:20px;
         border-bottom:solid 1px lighten($border_color);

@@ -11,7 +11,6 @@
     <title>Qravel</title>
 
     <!-- Styles -->
-
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/header.css') }}" rel="stylesheet">
     
@@ -48,7 +47,7 @@
             </form>
           </li>
           <li class="header_menu_new">
-              <!--ログイン時は質問投稿画面に--><a class="nav-link questionNew" href="/question/new">質問する</a>　
+              <!--ログイン時は質問投稿画面に--><a class="nav-link questionNew" href="/newQuestion">質問する</a>　
           </li>
           
           <ul class="header_menu_inner">
