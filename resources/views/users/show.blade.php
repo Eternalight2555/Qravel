@@ -61,7 +61,13 @@
                         </a>
                         </div>
                         <div class="question-status"><p>受付中</p></div>
-                        <div class="question-tag">ここにタグを表示</div>
+                        <div class="question-tag">
+                            <p>
+                            @foreach ($tags[$question->id] as $tagname) 
+                                <span class="badge badge-secondary tag">{{ $tagname }}</span>
+                            @endforeach
+                            </p>
+                        </div>
                     </div>
                 @endforeach
                 </div>
