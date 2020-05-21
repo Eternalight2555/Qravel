@@ -40,7 +40,7 @@ document.getElementById("modal-overlay").style.display = "block";
 <!-- モーダルウィンドウここまで -->
 
 <div class="questionShowPage">
-    <div class="questionContent">
+    <div class="content">
         <div class="form-group">
             タイトル<br>
             <p class="title">{{ $question->title }}</p>
@@ -76,10 +76,9 @@ document.getElementById("modal-overlay").style.display = "block";
         </div>
     </div>
     
-    <div class="answerContent">
+    <div class="content">
         <?php 
             $i=0;
-            $user_name="";
         ?>
         @foreach ($answers as $answer) 
             <div class="form-group">
