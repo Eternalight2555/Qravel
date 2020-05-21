@@ -23,6 +23,14 @@
   padding: 5px;
   border: solid 1px #d0d0d0;
 }
+.questionShowPage .content .reply_form_content {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.questionShowPage .content .reply_form_content form {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 .questionShowPage .content .answer_form_content {
   padding-left: 5%;
   border-bottom: solid 1px #d0d0d0;
