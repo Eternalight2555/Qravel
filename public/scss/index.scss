@@ -12,11 +12,20 @@
           margin: 10px 0;
         }
         .question-status {
-          background-color: $status_color;
-          width: 50px;
-          text-align: center;
-          border-radius: 4px;
-          color: $bg_color;
+           #end{
+            background-color:$status_color_end;
+            width: 50px;
+            text-align: center;
+            border-radius: 4px;
+            color: #F4F5F7;
+           }
+           #noend{
+            background-color: $status_color_noend;
+            width: 50px;
+            text-align: center;
+            border-radius: 4px;
+            color: #F4F5F7;
+           }
         }
         .question-tag {
           float: left;
