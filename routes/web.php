@@ -19,7 +19,7 @@ Route::group(['middleware'=>['auth']],function(){
 
 
 // ユーザ詳細画面表示用
-Route::get('/user/show','QuestionsController@show_userpage');
+Route::get('/users/show','QuestionsController@show_userpage');
 
 // ページ番号をクリックしたとき、ページ遷移
 Route::get('/ranking_page/{page_id}','QuestionsController@paging');
@@ -27,11 +27,6 @@ Route::get('/ranking_page/{page_id}','QuestionsController@paging');
 
 //質問投稿画面を表示
 Route::get('/question/new','QuestionsController@question_new');
-
-
-
-//ユーザー詳細画面を表示
-Route::get('/users/show','QuestionsController@user_show');
 
 // 検索ボタンを押したとき検索結果をトップページに表示
 Route::post('/search','QuestionsController@search');
