@@ -13,7 +13,13 @@
                             <h3 class="question_title">{{ optional($question)->title }}</h3>
                         </a>
                         
-                        <div class="question-status"><p>受付中</p></div>
+                        <div class="question-status">
+                            <?php if($question->crear_flag){ ?>
+                            <p id="end">回答済</p>
+                            <?php }else{ ?>
+                            <p id="noend">受付中</p>
+                            <?php } ?>
+                        </div>
                         <div class="question-tag">
                             @foreach ($tagnames[$question->id] as $tagname) 
                                 <span class="badge badge-pill badge-primary">{{ $tagname }}</span>
