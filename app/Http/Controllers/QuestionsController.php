@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Question;
 use App\Tag;
 use App\TagsQuestion;
+use App\UsersQuestion;
 use App\User;
 use App\Answer;
 use Auth;
@@ -199,11 +200,11 @@ class QuestionsController extends Controller
     public function bookmark($question_id)
     {
         // 既にブックマークされているかを判断する
-        $target = User_Question::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
-        if ($target !== undefined){
+        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        if ($target != null){
             $target->delete();
         }else{
-            $bookmark = new User_Question;
+            $bookmark = new UsersQuestion;
             $bookmark->user_id = Auth::user()->id;
             $bookmark->questions_id = $question_id;
         }
