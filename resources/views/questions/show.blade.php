@@ -35,13 +35,11 @@
     <div class="content col-sm-offset-2 col-sm-8">
         <div class="question_title">
             <h2 class="title">{{ $question->title }}</h2>
-            <?php if($show_user==null){?>
+            @if($show_user==null)
                 <a href={{ route('login') }}>
                     ログインしてブックマークする
                 </a> 
-            <?php }else{ ?>
-
-            @if($target == null || $target->delete_trigger == 1)
+            @elseif($target == null || $target->delete_trigger == 1)
                 <a onclick="return confirm('{{ $question->title }}をブックマークしますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマーク</a>
             @else
                 <a onclick="return confirm('{{ $question->title }}をブックマークから外しますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマークを外す</a>
