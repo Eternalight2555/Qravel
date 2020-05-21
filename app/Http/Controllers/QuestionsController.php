@@ -208,19 +208,30 @@ class QuestionsController extends Controller
         }
         //eval(\Psy\sh());
         
-        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
+        // ブックマークしているかを判断する
+        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        
+        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users,'target' => $target]);
     }
     
     public function bookmark($question_id)
     {
         // 既にブックマークされているかを判断する
-        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
-        if ($target != null){
-            $target->delete();
-        }else{
+        $target = UsersQuestion::where('questions_id',$question_id)->where('user_id',Auth::user()->id)->first();
+        // eval(\Psy\sh());
+        if ($target == null){
             $bookmark = new UsersQuestion;
             $bookmark->user_id = Auth::user()->id;
             $bookmark->questions_id = $question_id;
+            $bookmark->save();
+        }else{
+            if($target->delete_trigger == 0){
+                $target->delete_trigger = 1;
+                $target->save();
+            }else{
+                $target->delete_trigger = 0;
+                $target->save();
+            }
         }
         return redirect('/question/show/'.$question_id);
     }
@@ -253,11 +264,21 @@ class QuestionsController extends Controller
             if($answer->parent_id == NULL) array_push($answered_questions,Question::find($answer->Q_id));
         }
         
+        // ブックマークした質問を取得
+        $bookmarked_questions = [];
+        
+        $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
+        foreach($bookmarks as $bookmark){
+            if($bookmark->delete_trigger == 0){
+                array_push($bookmarked_questions,Question::find($bookmark->questions_id));
+            }
+        }
+        
         // Userモデルを介してデータを取得
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions]);
+        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
         
     }
 

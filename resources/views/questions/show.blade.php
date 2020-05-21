@@ -40,8 +40,13 @@
                     ログインしてブックマークする
                 </a> 
             <?php }else{ ?>
+
+            @if($target == null || $target->delete_trigger == 1)
                 <a onclick="return confirm('{{ $question->title }}をブックマークしますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマーク</a>
-            <?php }    ?>
+            @else
+                <a onclick="return confirm('{{ $question->title }}をブックマークから外しますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマークを外す</a>
+            @endif
+
         </div>
         <div class="question_main">
             <h4>質問内容</h4>
