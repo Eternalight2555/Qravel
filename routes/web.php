@@ -35,6 +35,8 @@ Route::get('/search/{key_word}/{page_id}','QuestionsController@search_paging');
 
 Auth::routes();
 
+Route::get('/bookmark/{question_id}','QuestionsController@bookmark');
+
 Route::get('/question/show/{question_id}','QuestionsController@show');
 Route::get('/question/crear/{question_id}','QuestionsController@crear');
 

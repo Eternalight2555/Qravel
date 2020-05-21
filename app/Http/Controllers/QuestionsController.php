@@ -136,6 +136,7 @@ class QuestionsController extends Controller
         return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     }
     
+    
     public function show($question_id)
     {
         // 質問をすべて取得
@@ -168,7 +169,23 @@ class QuestionsController extends Controller
             array_push($tagnames,$t->name);
         }
         //eval(\Psy\sh());
+        
         return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
+    }
+    
+    public function bookmark($question_id)
+    {
+        // 既にブックマークされているかを判断する
+        $target = User_Question::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        if ($target !== undefined){
+            $target->delete();
+        }else{
+            $bookmark = new User_Question;
+            $bookmark->user_id = Auth::user()->id;
+            $bookmark->questions_id = $question_id;
+        }
+        
+        return redirect('/question/show/'.$question_id);
     }
     
     public function crear($question_id)
