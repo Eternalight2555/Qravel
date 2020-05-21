@@ -24,12 +24,12 @@ Route::get('/users/show','QuestionsController@show_userpage');
 // ページ番号をクリックしたとき、ページ遷移
 Route::get('/ranking_page/{page_id}','QuestionsController@paging');
 
-
 //質問投稿画面を表示
 Route::get('/question/new','QuestionsController@question_new');
 
 // 検索ボタンを押したとき検索結果をトップページに表示
 Route::post('/search','QuestionsController@search');
+
 // 検索結果ページからのページング
 Route::get('/search/{key_word}/{page_id}','QuestionsController@search_paging');
 
@@ -40,6 +40,7 @@ Route::get('/question/show/{question_id}','QuestionsController@show');
 Route::get('/', 'QuestionsController@index')->name('home');
 
 Route::post('/answer/new/{question_id}', 'AnswersController@store');
+
 Route::post('/reply/new/{answer_id}', 'AnswersController@replystore');
 
 Route::get('/home', 'QuestionsController@index')->name('home');
