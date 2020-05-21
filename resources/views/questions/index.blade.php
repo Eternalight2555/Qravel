@@ -18,7 +18,7 @@
                                 <span>{{ $tagname }}</span>
                             @endforeach
                         </div>
-                        <div class="questioner">ユーザーネーム</div>
+                        <div class="questioner">{{$usernames[$question->id]}}</div>
                     </div>
                 </div>
               @endforeach

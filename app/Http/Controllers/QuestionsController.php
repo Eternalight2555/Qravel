@@ -113,10 +113,13 @@ class QuestionsController extends Controller
         $questions = [];
         
         $questionstags=[];
+        
+        $questionsuser=[];
         // そのページの質問を取得
         for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
-
-            array_push($questions,Question::find($i));
+            
+            $q = Question::find($i);
+            array_push($questions,$q);
             
             $tags = TagsQuestion::where('questions_id', $i)
             ->get();
@@ -126,11 +129,12 @@ class QuestionsController extends Controller
                 //eval(\Psy\sh());
                 array_push($tagnames,$t->name);
             }
-            $questionstags[$i]=$tagnames;
+            $questionstags[$q->id]=$tagnames;
+            $questionsuser[$q->id]=User::find($q->user_id)->name;
         }
         //eval(\Psy\sh());
         // トップviewにデータを送る
-        return view('questions/index',['tagnames'=>$questionstags,'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
+        return view('questions/index',['tagnames'=>$questionstags,'usernames'=>$questionsuser,'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     }
     
     public function paging($page_id){
