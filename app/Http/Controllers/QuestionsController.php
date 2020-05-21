@@ -208,7 +208,6 @@ class QuestionsController extends Controller
             $bookmark->user_id = Auth::user()->id;
             $bookmark->questions_id = $question_id;
         }
-        
         return redirect('/question/show/'.$question_id);
     }
     
