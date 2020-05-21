@@ -62,7 +62,7 @@ class QuestionsController extends Controller
                 array_push($tags,$t->id);
             }
         }
-        eval(\Psy\sh());
+        //eval(\Psy\sh());
         // 入力に問題がなければCardモデルを介して、タイトルとかをqテーブルに保存
         //eval(\Psy\sh());
         $question = new Question;
