@@ -197,16 +197,14 @@ class QuestionsController extends Controller
             $ans_user=User::find($answer->user_id);
             array_push($answer_users,$ans_user->name);
         }
-        //$tagids = TagsQuestion::where('questions_id',$question_id)->get();
+        
         $tags = TagsQuestion::where('questions_id', $question_id)
             ->get();
         $tagnames=[];
         foreach($tags as $tag){
             $t = Tag::where("id",$tag->tags_id)->first();
-            //eval(\Psy\sh());
             array_push($tagnames,$t->name);
         }
-        //eval(\Psy\sh());
         
         // ブックマークしているかを判断する
         $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
@@ -218,7 +216,6 @@ class QuestionsController extends Controller
     {
         // 既にブックマークされているかを判断する
         $target = UsersQuestion::where('questions_id',$question_id)->where('user_id',Auth::user()->id)->first();
-        // eval(\Psy\sh());
         if ($target == null){
             $bookmark = new UsersQuestion;
             $bookmark->user_id = Auth::user()->id;
