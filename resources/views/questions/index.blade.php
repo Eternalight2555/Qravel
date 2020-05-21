@@ -14,8 +14,12 @@
                         </a>
                         
                         <div class="question-status"><p>受付中</p></div>
-                        <div class="question-tag">ここにタグを表示</div>
-                        <div class="questioner">ユーザさん</div>
+                        <div class="question-tag">
+                            @foreach ($tagnames[$question->id] as $tagname) 
+                                <span>{{ $tagname }}</span>
+                            @endforeach
+                        </div>
+                        <div class="questioner">ユーザーネーム</div>
                     </div>
                 </div>
               @endforeach

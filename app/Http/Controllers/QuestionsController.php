@@ -46,8 +46,8 @@ class QuestionsController extends Controller
         {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        $tags = $request->tags;
         
+        $tags=[];
         if(!empty($request->ninitags)){
             //
             $tagnames = preg_split("/[\s,]+/", $request->ninitags);
@@ -71,6 +71,14 @@ class QuestionsController extends Controller
         $question->save();
         
         
+        if(!empty($request->tags)){
+            foreach($request->tags as $tagid){
+                $q = new TagsQuestion;
+                $q->tags_id = $tagid;
+                $q->questions_id = $question->id;
+                $q->save();
+            }
+        }
         if(!empty($tags)){
             foreach($tags as $tagid){
                 $q = new TagsQuestion;
@@ -102,15 +110,26 @@ class QuestionsController extends Controller
         // 配列の初期化
         $questions = [];
         
+        $questionstags=[];
         // そのページの質問を取得
         for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
 
             array_push($questions,Question::find($i));
             
+            $tags = TagsQuestion::where('questions_id', $i)
+            ->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$i]=$tagnames;
+
         }
-        
+        //eval(\Psy\sh());
         // トップviewにデータを送る
-        return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
+        return view('questions/index',['tagnames'=>$questionstags,'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     }
     
     public function paging($page_id)
