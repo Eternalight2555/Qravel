@@ -6,49 +6,38 @@
 }
 .questionShowPage .content .question_title {
   margin: 10px 0;
-  border-bottom: solid 1px #d0d0d0;
+  border-bottom: solid 2px #d0d0d0;
 }
 .questionShowPage .content .tag {
+  color: #111;
+  font-weight: lighter;
   background: #a9d0f5;
 }
-/* 一番上に表示させるdiv */#anser-content {
-  display : none;
-  z-index: 2;
-  /* ボックスの重なりの順序を指定 */
-  position: fixed;
-  /* divをブロック表示します。何も表示しないときは、none */
-  /*display:block;*/
-  /* 位置の固定 */
-  top: 10%;
-  /* 位置 */
-  left: 25%;
-  width: 50%;
-  /* 幅・高さ */
-  height: auto;
-  margin: auto;
-  /* 外側の余白 */
-  padding: 10px 20px;
-  /* 内側の余白 */
-  border: 2px solid #aaa;
-  /* 線 */
-  background: #fff;
-  /* 背景の色 */
+.questionShowPage .content .question_main p {
+  border-radius: 5px;
+  padding: 5px;
+  border: solid 1px #d0d0d0;
 }
-/* 2番目に表示させるdiv半透明の膜 */#modal-overlay {
-  /* ボックスの重なりの順序を指定 */
-  z-index: 1;
-  display : none;
-  /* divをブロック表示します。何も表示しないときは、none */
-  position: fixed;
-  /* 位置の固定 */
-  top: 0;
-  /* 位置 */
-  left: 0;
-  width: 100%;
-  /* 幅・高さ */
-  height: 100%;
-  background-color: rgba(51, 51, 51, 0.6);
-  /* 背景の色（半透明） */
-  margin-top: 0px;
-  /* 外側の余白 */
+.questionShowPage .content .answer_form_content p {
+  border-radius: 5px;
+  padding: 5px;
+  border: solid 1px #d0d0d0;
+}
+.questionShowPage .content .answer_form_content {
+  padding-left: 5%;
+  border-bottom: solid 1px #d0d0d0;
+}
+.questionShowPage .content .reply_form {
+  padding-left: 5%;
+  border-bottom: solid 1px #d0d0d0;
+}
+.questionShowPage .content .answer_count {
+  border-bottom: solid 2px #d0d0d0;
+}
+.questionShowPage .content .answer_count span {
+  color: #f78181;
+}
+.modal-body textarea {
+  margin: auto;
+  width: 80%;
 }
