@@ -9,5 +9,4 @@ class UsersQuestion extends Model
     //
     protected $fillable = ['deleted_time'];
     
-    protected $primaryKey = 'user_id';
 }

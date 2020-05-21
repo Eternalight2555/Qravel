@@ -217,7 +217,8 @@ class QuestionsController extends Controller
     public function bookmark($question_id)
     {
         // 既にブックマークされているかを判断する
-        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        $target = UsersQuestion::where('questions_id',$question_id)->where('user_id',Auth::user()->id)->first();
+        // eval(\Psy\sh());
         if ($target == null){
             $bookmark = new UsersQuestion;
             $bookmark->user_id = Auth::user()->id;
@@ -263,11 +264,21 @@ class QuestionsController extends Controller
             if($answer->parent_id == NULL) array_push($answered_questions,Question::find($answer->Q_id));
         }
         
+        // ブックマークした質問を取得
+        $bookmarked_questions = [];
+        
+        $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
+        foreach($bookmarks as $bookmark){
+            if($bookmark->delete_trigger == 0){
+                array_push($bookmarked_questions,Question::find($bookmark->questions_id));
+            }
+        }
+        
         // Userモデルを介してデータを取得
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions]);
+        return view('users/show',['user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
         
     }
 
