@@ -2,16 +2,15 @@ $bg_color:#F4F5F7;
 $border_color:#D0D0D0;
 $header_height:60px;
 
-$tag_color:#337ab7;
+$base_font_color:#111111;
+
+$tag_color:#A9D0F5;
 
 $status_color_end:#696969;
 
-$status_color_noend:#F5A9BC;
+$status_color_noend:#F78181;
 
 //質問タイトルのリンクの色
-.question {
-    a{
-        color: #1A0DAB;
-    }
-}
+
+$link_color:#2E9AFE;
 
