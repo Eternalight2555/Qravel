@@ -170,6 +170,15 @@ class QuestionsController extends Controller
         //eval(\Psy\sh());
         return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'$reply_list'=>$reply_list]);
     }
+    
+    public function crear($question_id){
+        $question = Question::find($question_id);
+        $question->crear_flag=true;
+        $question->save();
+        
+        return redirect('/question/show/'.$question_id);
+    }
+    
     public function show_userpage(){
         
         // ユーザ番号を取得
