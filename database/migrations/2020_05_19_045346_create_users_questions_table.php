@@ -14,6 +14,7 @@ class CreateUsersQuestionsTable extends Migration
     public function up()
     {
         Schema::create('users_questions', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('user_id');
             $table->integer('questions_id');
             $table->integer('delete_trigger')->default(0);

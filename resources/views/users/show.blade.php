@@ -28,10 +28,23 @@
         </div>
     </div>
     <div class="content">
-        <div class="user_book_wrapper row">
+        <div class="row">
+            <div class="user_book_wrapper col-sm-offset-2 col-sm-8">
             
-            <!-- ブックマーク -->
-            
+                <!-- ブックマーク -->
+                @foreach($bookmarked_questions as $bookmark)
+                    <div class="user_question">
+                        <div class="question">
+                            <a href="/question/show/{{ $bookmark->id }}" class="question_link">
+                                <h3 class="question_title">{{ $bookmark->title }}</h3>
+                            </a>
+                        </div>
+                        <div class="question-status"><p>受付中</p></div>
+                        <div class="question-tag">ここにタグを表示</div>
+                    </div>
+                @endforeach
+                
+            </div>
         </div>
     </div>
     <div class="content">
