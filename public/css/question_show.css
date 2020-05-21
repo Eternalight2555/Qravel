@@ -1,28 +1,15 @@
-/* モーダルウィンドウのcss設定 */.questionShowPage .content .ranking_wrapper {
-  margin-top: 90px;
+/* モーダルウィンドウのcss設定 */.questionShowPage {
+  margin-top: 60px;
 }
-.questionShowPage .content .ranking_wrapper .question {
-  padding: 10px 10px 20px 10px;
+.questionShowPage .content {
+  margin-top: 30px;
+}
+.questionShowPage .content .question_title {
+  margin: 10px 0;
   border-bottom: solid 1px #d0d0d0;
 }
-.questionShowPage .content .ranking_wrapper .question .question_title {
-  margin: 10px 0;
-}
-.questionShowPage .content .ranking_wrapper .question .question-status {
-  background-color: #696969;
-  width: 50px;
-  text-align: center;
-  border-radius: 4px;
-  color: #f4f5f7;
-}
-.questionShowPage .content .ranking_wrapper .question .question-tag {
-  float: left;
-}
-.questionShowPage .content .ranking_wrapper .question .questioner {
-  text-align: right;
-}
-.questionShowPage .content .btn {
-  margin-top: 20px;
+.questionShowPage .content .tag {
+  background: #a9d0f5;
 }
 /* 一番上に表示させるdiv */#anser-content {
   display : none;

@@ -150,14 +150,28 @@ class QuestionsController extends Controller
         
         // 配列の初期化
         $questions = [];
+        $questionstags=[];
         
+        $questionsuser=[];
         // そのページの質問を取得
         for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
-            array_push($questions,Question::find($i));
+            $q = Question::find($i);
+            array_push($questions,$q);
+            
+            $tags = TagsQuestion::where('questions_id', $i)
+            ->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$q->id]=$tagnames;
+            $questionsuser[$q->id]=User::find($q->user_id)->name;
         }
         
         // トップviewにデータを送る
-        return view('questions/index',['questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
+        return view('questions/index',['tagnames'=>$questionstags,'usernames'=>$questionsuser,'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page]);
     }
     
     
@@ -218,7 +232,6 @@ class QuestionsController extends Controller
                 $target->save();
             }
         }
-        
         return redirect('/question/show/'.$question_id);
     }
     
