@@ -20,6 +20,7 @@ class QuestionsController extends Controller
     public function new()
     {
         $tags = Tag::get();
+        //eval(\Psy\sh());
         return view('questions/new',['tags'=>$tags]);
         // テンプレート「listing/new.blade.php」を表示します。
     }
@@ -77,7 +78,9 @@ class QuestionsController extends Controller
         $page_id = 1;
         // ページ数を取得
         $questions = Question::get();
-        $max_page = ceil(count($questions)/MAX);
+        
+        $question_count = count($questions);
+        $max_page = ceil($question_count/MAX);
         
         // 開始地点と終了地点の質問idを取得
         $end_id = $page_id * MAX;
@@ -87,7 +90,7 @@ class QuestionsController extends Controller
         $questions = [];
         
         // そのページの質問を取得
-        for($i = $start_id; $i <= $end_id; $i++){
+        for($i = $start_id; $i <= $end_id || $i <= $question_count; $i++){
             array_push($questions,Question::find($i));
         }
         
