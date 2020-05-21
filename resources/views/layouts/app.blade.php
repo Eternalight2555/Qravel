@@ -33,8 +33,9 @@
 
     <link href="{{ secure_asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/register.css') }}" rel="stylesheet">
-
-
+    
+    <link href="{{ secure_asset('css/serch.css') }}" rel="stylesheet">
+      
 </head>
 <body>
     @if(Auth::check())<!--ログイン時-->

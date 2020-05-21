@@ -1,0 +1,38 @@
+.top_wrappe .content .search_wrapper {
+  margin-top: 90px;
+}
+.top_wrappe .content .search_wrapper p {
+  margin-left: 10px;
+}
+.top_wrappe .content .search_wrapper .serch_question {
+  padding: 10px 10px 20px 10px;
+  border-bottom: solid 1px #d0d0d0;
+}
+.top_wrappe .content .search_wrapper .question-status {
+  float: left;
+}
+.top_wrappe .content .search_wrapper .question-status #end {
+  background-color: #696969;
+  width: 50px;
+  text-align: center;
+  border-radius: 4px;
+  color: #f4f5f7;
+}
+.top_wrappe .content .search_wrapper .question-status #noend {
+  background-color: #f78181;
+  width: 50px;
+  text-align: center;
+  border-radius: 4px;
+  color: #f4f5f7;
+}
+.top_wrappe .content .search_wrapper .question-tag {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.top_wrappe .content .search_wrapper .questioner {
+  text-align: right;
+}
+.top_wrappe .content .search_wrapper .page_btn {
+  margin-top: 20px;
+}
