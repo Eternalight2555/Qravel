@@ -38,7 +38,7 @@ document.getElementById("modal-overlay").style.display = "block";
 <div id="modal-overlay" ></div>
 
 <!-- モーダルウィンドウここまで -->
-
+@include('common.errors')
 <div class="questionShowPage">
     <div class="content">
         <div class="form-group">
@@ -97,7 +97,7 @@ document.getElementById("modal-overlay").style.display = "block";
                 <summary>この回答に対する返信</summary>
                 @foreach ($reply_list[$i] as $reply)
                     <div class="form-group">
-                        <p>回答内容<br>{{$reply->content}}</p>
+                        <p>返信内容<br>{{$reply->content}}</p>
                     </div>
                 @endforeach
                     <?php if($question->clear_flag==true): ?>
@@ -116,7 +116,7 @@ document.getElementById("modal-overlay").style.display = "block";
                         <form action= "{{ url('/reply/new', $answer->id) }}" method="POST" class="form-horizontal">
                             {{csrf_field()}} 
                             <div class="form-group"> 
-                                <label>回答内容</label> 
+                                <label>返信内容</label> 
                                 <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{ old('content') }}</textarea>
                             </div>
                             <div class="text-center"> 
