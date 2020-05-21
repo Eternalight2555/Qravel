@@ -53,7 +53,7 @@
           <ul class="header_menu_inner">
               <!--ログイン時のView-->
               <li class="user">
-                  <a class="nav-link user-name" href="/user/show" onclick="">
+                  <a class="nav-link user-name" href="/users/show" onclick="">
                     {{ Auth::user()->name }}さん
                   </a>
               </li>
