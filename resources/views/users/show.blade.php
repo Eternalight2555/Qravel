@@ -32,6 +32,7 @@
             <div class="user_book_wrapper col-sm-offset-2 col-sm-8">
             
                 <!-- ブックマーク -->
+                <h2>ブックマークした質問</h2>
                 @foreach($bookmarked_questions as $bookmark)
                     <div class="user_question">
                         <div class="question">
