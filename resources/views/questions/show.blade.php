@@ -40,11 +40,16 @@ document.getElementById("modal-overlay").style.display = "block";
 <!-- モーダルウィンドウここまで -->
 
 <div class="questionShowPage">
-    <div class="content">
-        <div class="form-group">
-            タイトル<br>
-            <p class="title">{{ $question->title }}</p>
-            <a onclick="return confirm('{{ $question->title }}をブックマークしますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマーク</a>
+    <div class="content col-sm-offset-2 col-sm-8">
+        <div class="question_title">
+            <h3 class="title">{{ $question->title }}</h3>
+            <?php if($show_user==null){?>
+                <a href={{ route('login') }}>
+                    ログインしてブックマークする
+                </a> 
+            <?php }else{ ?>
+                <a onclick="return confirm('{{ $question->title }}をブックマークしますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマーク</a>
+            <?php }    ?>
         </div>
         <div class="form-group">
             <p>質問内容<br>{{$question->content}}</p>
@@ -77,7 +82,7 @@ document.getElementById("modal-overlay").style.display = "block";
         </div>
     </div>
     
-    <div class="content">
+    <div class="content col-sm-offset-2 col-sm-8">
         <?php 
             $i=0;
         ?>
@@ -85,7 +90,7 @@ document.getElementById("modal-overlay").style.display = "block";
         <?php if(count($answers)<=0): ?>
             <p>この質問に対する回答はまだありません</p>
         <?php else: ?>
-            <p>この質問に対する回答はこちら</p>
+            <p>回答 {{count($answers)}} 件</p>
         <?php endif; ?>
         @foreach ($answers as $answer) 
             <div class="form-group">
