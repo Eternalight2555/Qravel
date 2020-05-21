@@ -2,66 +2,78 @@
 
 @section('content')
 
-<div class="top_wrapper">
+<div class="top_wrapper container">
     <div class="content">
-        <div class="user_info_wrapper">
-            
-            <h2>ユーザ情報</h2>
-            <!-- ユーザ情報 -->
-            <div class="user_name">
-                <h3>ユーザ名</h3>
-                <p>{{ $user->name }}</p>
+        <div class="row">
+            <div class="user_info_wrapper col-sm-offset-2 col-sm-8">
+                <h2>ユーザ情報</h2>
+                <!-- ユーザ情報 -->
+                <div class="user_name">
+                    <h3>ユーザ名</h3>
+                    <p>{{ $user->name }}</p>
+                </div>
+                <div class="user_address">
+                    <h3>メールアドレス</h3>
+                    <p>{{ $user->email }}</p>
+                </div>
+                <div class="user_profile">
+                    <h3>プロフィール</h3>
+                    @if($user->profile != NULL)
+                        <p>{{ $user->profile }}</p>
+                    @else
+                        <p>プロフィールなし</p>
+                    @endif
+                </div>
             </div>
-            <div class="user_address">
-                <h3>メールアドレス</h3>
-                <p>{{ $user->email }}</p>
-            </div>
-            <div class="user_profile">
-                <h3>プロフィール</h3>
-                @if($user->profile != NULL)
-                    <p>{{ $user->profile }}</p>
-                @else
-                    <p>プロフィールなし</p>
-                @endif
-            </div>
-            
         </div>
     </div>
     <div class="content">
-        <div class="user_book_wrapper">
+        <div class="user_book_wrapper row">
             
             <!-- ブックマーク -->
             
         </div>
     </div>
     <div class="content">
-        <div class="user_question_wrapper">
-            
-            <h2>過去の質問</h2>
-            <!-- 自分の質問 -->
-            @foreach($questions as $question)
-                <a href="/question/show/{{ $question->id }}" class="question_link">
-                    <div class="question">
-                        <h3 class="question_title">{{ $question->title }}</h3>
+        <div class="row">
+            <div class="user_question_wrapper col-sm-offset-2 col-sm-8">
+                <h2>過去の質問</h2>
+                <!-- 自分の質問 -->
+                <div class="questions">
+                @foreach($questions as $question)
+                    <div class="user_question">
+                        <div class="question">
+                        <a href="/question/show/{{ $question->id }}" class="question_link">
+                                <h3 class="question_title">{{ $question->title }}</h3>
+                        </a>
+                        </div>
+                        <div class="question-status"><p>受付中</p></div>
+                        <div class="question-tag">ここにタグを表示</div>
                     </div>
-                </a>
-            @endforeach
-            
+                @endforeach
+                </div>
+            </div>
         </div>
     </div>
     <div class="content">
-        <div class="user_answer_wrapper">
-            
-            <h2>回答した質問</h2>
-            <!-- 自分の解答 -->
-            @foreach($answered_questions as $answered_question)
-                <a href="/question/show/{{ $answered_question->id }}" class="question_link">
+        <div class="row">
+            <div class="user_answer_wrapper col-sm-offset-2 col-sm-8">
+                <h2>回答した質問</h2>
+                <!-- 自分の解答 -->
+                <div class="questions">
+                @foreach($answered_questions as $answered_question)
+                <div class="user_answer">
                     <div class="question">
-                        <h3 class="question_title">{{ $answered_question->title }}</h3>
+                        <a href="/question/show/{{ $answered_question->id }}" class="question_link">
+                                <h3 class="question_title">{{ $answered_question->title }}</h3>
+                        </a>
                     </div>
-                </a>
-            @endforeach
-            
+                    <div class="question-status"><p>解決済み</p></div>
+                    <div class="question-tag">ここにタグを表示</div>
+                </div>
+                @endforeach
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,53 @@
+@import 'variables';
+.top_wrapper {
+    .content {
+        .user_info_wrapper {
+            text-align: center;
+            margin-top:$header_height+40px;
+            background-color: white;
+            padding: 10px;
+            border: solid 10px #9dceff;
+            border-radius: 20px;
+            h2 {
+                font-size: 30px;
+                
+            }
+            .user_name {
+                p {
+                    font-size: 50px;
+                }
+            }
+            .user_address {
+                p {
+                    font-size: 17px;
+                }
+            }
+            
+        }
+        
+            .user_question,.user_answer {
+                padding:10px 10px 10px 10px;
+                border-bottom:solid 1px lighten($border_color);
+            }
+            
+        
+        .questions {
+            .question_title {
+                margin: 10px 0;
+            }
+            .question-status {
+                background-color: $status_color;
+                width: 50px;
+                text-align: center;
+                border-radius: 4px;
+                color: $bg_color;
+                float: left;
+                margin-right: 20px;
+                p {
+                    margin: 0;
+                }
+            }
+            
+        }
+    }
+}
