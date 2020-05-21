@@ -208,19 +208,29 @@ class QuestionsController extends Controller
         }
         //eval(\Psy\sh());
         
-        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users]);
+        // ブックマークしているかを判断する
+        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        
+        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users,'target' => $target]);
     }
     
     public function bookmark($question_id)
     {
         // 既にブックマークされているかを判断する
         $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
-        if ($target != null){
-            $target->delete();
-        }else{
+        if ($target == null){
             $bookmark = new UsersQuestion;
             $bookmark->user_id = Auth::user()->id;
             $bookmark->questions_id = $question_id;
+            $bookmark->save();
+        }else{
+            if($target->delete_trigger == 0){
+                $target->delete_trigger = 1;
+                $target->save();
+            }else{
+                $target->delete_trigger = 0;
+                $target->save();
+            }
         }
         return redirect('/question/show/'.$question_id);
     }

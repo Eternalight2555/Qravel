@@ -40,16 +40,17 @@ document.getElementById("modal-overlay").style.display = "block";
 <!-- モーダルウィンドウここまで -->
 @include('common.errors')
 <div class="questionShowPage">
-    <div class="content col-sm-offset-2 col-sm-8">
-        <div class="question_title">
-            <h3 class="title">{{ $question->title }}</h3>
-            <?php if($show_user==null){?>
-                <a href={{ route('login') }}>
-                    ログインしてブックマークする
-                </a> 
-            <?php }else{ ?>
+
+    <div class="content">
+        <div class="form-group">
+            タイトル<br>
+            <p class="title">{{ $question->title }}</p>
+            @if($target == null || $target->delete_trigger == 1)
                 <a onclick="return confirm('{{ $question->title }}をブックマークしますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマーク</a>
-            <?php }    ?>
+            @else
+                <a onclick="return confirm('{{ $question->title }}をブックマークから外しますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマークを外す</a>
+            @endif
+
         </div>
         <div class="form-group">
             <p>質問内容<br>{{$question->content}}</p>
