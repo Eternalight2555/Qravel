@@ -9,8 +9,8 @@
               @foreach($questions as $question)
                 <div class="row">
                     <div class="question col-sm-offset-2 col-sm-8">
-                        <a class="stretched-link" href="/question/show/{{ $question->id }}" class="question_link">
-                            <h3 class="question_title">{{ $question->title }}</h3>
+                        <a class="stretched-link" href="/question/show/{{ optional($question)->id }}" class="question_link">
+                            <h3 class="question_title">{{ optional($question)->title }}</h3>
                         </a>
                     </div>
                 </div>
