@@ -1,8 +1,6 @@
 /* モーダルウィンドウのcss設定 */
+@import 'variables';
 /* 一番上に表示させるdiv */
-.questionShowPage {
-  margin-top: 60px;
-}
 #anser-content{
     display :none;
 	/* ボックスの重なりの順序を指定 */
