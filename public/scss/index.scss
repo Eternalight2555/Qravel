@@ -1,12 +1,33 @@
 @import 'variables';
 .top_wrapper{
   .content{
+    
     .ranking_wrapper{
-      margin-top:$header_height;
+      margin-top:$header_height+30px;
       .question{
-        padding-bottom:20px;
+        padding:10px 10px 20px 10px;
         border-bottom:solid 1px lighten($border_color);
+        
+        .question_title {
+          margin: 10px 0;
+        }
+        .question-status {
+          background-color: #696969;
+          width: 50px;
+          text-align: center;
+          border-radius: 4px;
+          color: #F4F5F7;
+        }
+        .question-tag {
+          float: left;
+        }
+        .questioner {
+          text-align: right;
+        }
       }
+    }
+    .btn {
+      margin-top: 20px;
     }
   }
 }

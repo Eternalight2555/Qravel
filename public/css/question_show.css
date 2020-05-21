@@ -1,48 +1,41 @@
-/* モーダルウィンドウのcss設定 */
-/* 一番上に表示させるdiv */
-.questionShowPage {
-  margin-top: 60px;
+/* モーダルウィンドウのcss設定 *//* 一番上に表示させるdiv */#anser-content {
+  display : none;
+  z-index: 2;
+  /* ボックスの重なりの順序を指定 */
+  position: fixed;
+  /* divをブロック表示します。何も表示しないときは、none */
+  /*display:block;*/
+  /* 位置の固定 */
+  top: 10%;
+  /* 位置 */
+  left: 25%;
+  width: 50%;
+  /* 幅・高さ */
+  height: auto;
+  margin: auto;
+  /* 外側の余白 */
+  padding: 10px 20px;
+  /* 内側の余白 */
+  border: 2px solid #aaa;
+  /* 線 */
+  background: #fff;
+  /* 背景の色 */
 }
-#anser-content{
-    display :none;
-	/* ボックスの重なりの順序を指定 */
-	z-index:2;
-	/* divをブロック表示します。何も表示しないときは、none */
-	/*display:block;*/
-	/* 位置の固定 */
-	position:fixed;
-	/* 位置 */
-	top:10%;
-	left:25%;
-	/* 幅・高さ */
-	width:50%;
-	height:auto;
-	/* 外側の余白 */
-	margin:auto;
-	/* 内側の余白 */
-	padding:10px 20px;
-	/* 線 */
-	border:2px solid #aaa;
-	/* 背景の色 */
-	background:#fff;
-}
-/* 2番目に表示させるdiv半透明の膜 */
-#modal-overlay{
-	/* ボックスの重なりの順序を指定 */
-	z-index:1;
-	/* divをブロック表示します。何も表示しないときは、none */
-	 display :none;
-	/* 位置の固定 */
-	position:fixed;
-	/* 位置 */
-	top:0;
-	left:0;
-	/* 幅・高さ */
-	width:100%;
-	height:100%;
-	/* 背景の色（半透明） */
-	background-color:rgba(51,51,51,0.6);
-	/* 外側の余白 */
-	margin-top:0px;
-	
+/* 2番目に表示させるdiv半透明の膜 */#modal-overlay {
+  /* ボックスの重なりの順序を指定 */
+  z-index: 1;
+  display : none;
+  /* divをブロック表示します。何も表示しないときは、none */
+  position: fixed;
+  /* 位置の固定 */
+  top: 0;
+  /* 位置 */
+  left: 0;
+  width: 100%;
+  /* 幅・高さ */
+  height: 100%;
+  background-color: rgba(51, 51, 51, 0.6);
+  /* 背景の色（半透明） */
+  margin-top: 0px;
+  /* 外側の余白 */
 }

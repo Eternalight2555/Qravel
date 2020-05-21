@@ -75,7 +75,14 @@ document.getElementById("modal-overlay").style.display = "block";
     </div>
     
     <div class="answerContent">
+        <?php 
+            $i=0;
+            $user_name="";
+        ?>
         @foreach ($answers as $answer) 
+            <div class="form-group">
+                <p>ユーザー名<br>{{$answer_users[$i]}}</p>
+            </div>
             <div class="form-group">
                 <p>回答内容<br>{{$answer->content}}</p>
             </div>
@@ -87,7 +94,10 @@ document.getElementById("modal-overlay").style.display = "block";
             </div>
             <details>
                 <summary>この回答に対する返信</summary>
-                @foreach ($answers as $answer)
+                @foreach ($reply_list[$i] as $reply)
+                    <div class="form-group">
+                        <p>回答内容<br>{{$reply->content}}</p>
+                    </div>
                 @endforeach
                     <?php if($question->clear_flag==true): ?>
                         <p>test</p>
@@ -117,6 +127,7 @@ document.getElementById("modal-overlay").style.display = "block";
                     </div>
                     
             </details>
+            <?php $i++; ?>
         @endforeach
     </div>
     
