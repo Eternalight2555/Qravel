@@ -19,7 +19,7 @@ class CreateAnswersTable extends Migration
             $table->integer('Q_id');
 
             $table->integer('parent_id')->nullable();
-            $table->string('content');
+            $table->text('content');
             $table->integer('good_count')->default(0);
             $table->timestamps();
         });

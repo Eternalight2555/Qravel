@@ -49,8 +49,8 @@ class QuestionsController extends Controller
         {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        $tags = $request->tags;
         
+        $tags=[];
         if(!empty($request->ninitags)){
             //
             $tagnames = preg_split("/[\s,]+/", $request->ninitags);
@@ -74,6 +74,14 @@ class QuestionsController extends Controller
         $question->save();
         
         
+        if(!empty($request->tags)){
+            foreach($request->tags as $tagid){
+                $q = new TagsQuestion;
+                $q->tags_id = $tagid;
+                $q->questions_id = $question->id;
+                $q->save();
+            }
+        }
         if(!empty($tags)){
             foreach($tags as $tagid){
                 $q = new TagsQuestion;
