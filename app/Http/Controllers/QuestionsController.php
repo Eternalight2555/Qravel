@@ -292,7 +292,7 @@ class QuestionsController extends Controller
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['Atags'=>$answerstags,'tags'=>$questionstags,'user_id' => $user_id, 'my_questions' => $my_questions, 'answers' => $answers, 'user' => $user, 'users' => $users, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
+        return view('users/show',['Atags'=>$answerstags,'tags'=>$questionstags,'user_id' => $user_id, 'my_questions' => $my_questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
         
     }
 
