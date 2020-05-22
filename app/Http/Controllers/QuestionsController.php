@@ -240,6 +240,35 @@ class QuestionsController extends Controller
         return redirect('/question/show/'.$question_id);
     }
     
+        public function edit(Request $request)
+    {
+        $messages = ['content.required' => '回答を入力してください。',];
+        //Validatorを使って入力された値のチェック(バリデーション)処理　（今回は256以上と空欄の場合エラーになります）
+        $validator = Validator::make($request->all() , ['content'=>['required', 
+            function($attribute, $value, $fail){
+                if(strlen($value)>65535){
+                    $fail('65535バイト以内で入力してください。(現在'.strlen($value).'バイト)');
+                }
+            }
+        ]],$messages);
+        
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+        
+        // 入力に問題がなければCardモデルを介して、タイトルとかをqテーブルに保存
+        //eval(\Psy\sh());
+        $question = Question::find($request->question_id);
+        $question->title = $request->title;
+        $question->content = $request->content;
+        $question->save();
+        
+        // 「/」 ルートにリダイレクト
+        return redirect('/question/show/'.$request->question_id);
+        
+    }
+    
 
     public function show_userpage($user_id)
     {

@@ -4,6 +4,8 @@
 
 <div id="modal-overlay" ></div>
 
+
+<!-- 回答用モーダル -->
 <div class="modal fade" id="modal1" tabindex="-1"
       role="dialog" aria-labelledby="label1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -15,7 +17,7 @@
         <form action= "{{ url('/answer/new', $question->id) }}" method="POST" class="form-horizontal">
           {{csrf_field()}} 
         <div class="form-group"> 
-          <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{ old('memo') }}</textarea>
+          <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{ old('content') }}</textarea>
         </div>
         <input type="hidden" name="q_id" value="{{ old('q_id', $question->id) }}">
         <div class="text-center">
@@ -28,6 +30,55 @@
   </div>
 </div>
 
+<!-- 質問編集用モーダル -->
+<div class="modal fade" id="modal2" tabindex="-1"
+      role="dialog" aria-labelledby="label1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="label2">回答内容</h5>
+      </div>
+      <div class="modal-body">
+        <form action= "{{ url('/question/edit', $question->id) }}" method="POST" class="form-horizontal">
+          {{csrf_field()}} 
+        <div class="form-group"> 
+          <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{ old('content') }}</textarea>
+        </div>
+        <input type="hidden" name="q_id" value="{{ old('q_id', $question->id) }}">
+        <div class="text-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">作成する</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 回答編集用モーダル -->
+<div class="modal fade" id="modal3" tabindex="-1"
+      role="dialog" aria-labelledby="label1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="label3">回答内容</h5>
+      </div>
+      <div class="modal-body">
+        <form action= "{{ url('/answer/edit', $question->id) }}" method="POST" class="form-horizontal">
+          {{csrf_field()}} 
+        <div class="form-group"> 
+          <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{ old('content') }}</textarea>
+        </div>
+        <input type="hidden" name="q_id" value="{{ old('q_id', $question->id) }}">
+        <div class="text-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">作成する</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- モーダルウィンドウここまで -->
 @include('common.errors')
@@ -65,7 +116,26 @@
                 if($question->clear_flag==true){ ?>ｘ
                     
             <?php }else if($show_user==$question->user_id){ ?>
-                    <a href="/" class="Btn">編集する</a>
+                    <!-- <a href="/" class="Btn">編集する</a> -->
+                <div class="question_edit_form">
+                    <details>
+                        <summary>編集する</summary>
+                            <form action= "{{ url('/question/edit', $question->id) }}" method="POST" class="form-horizontal">
+                                {{csrf_field()}} 
+                                <div class="form-group"> 
+                                    <label>タイトル</label> 
+                                    <input name="title" class="form-control" value="{{ $question->title }}" placeholder="詳細"></textarea>
+                                </div>
+                                <div class="form-group"> 
+                                    <label>質問内容</label> 
+                                    <textarea name="content" class="form-control" value="{{ $question->content }}" placeholder="詳細">{{ $question->content }}</textarea>
+                                </div>
+                                <div class="text-center"> 
+                                    <button type="submit" class="btn btn-primary"　class="createBtn"> 更新する </button> 
+                                </div>
+                            </form>
+                    </details>
+                </div>
             <?php }else if($show_user==null){?>
                     <a href={{ route('login') }}>
                         ログインして回答する
@@ -102,7 +172,23 @@
             </div>
             
             <?php if($show_user==$answer->user_id): ?>
-                <a href="/"class="Btn">回答を編集する</a>
+                <!-- <a data-toggle="modal" data-target="#modal3">回答を編集する</a> -->
+                <div class="answer_edit_form">
+                    <details>
+                        <summary>回答を編集する</summary>
+                            <form action= "{{ url('/answer/edit', $answer->id) }}" method="POST" class="form-horizontal">
+                                {{csrf_field()}} 
+                                <div class="form-group"> 
+                                    <label>回答内容</label> 
+                                    <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{$answer->content}}</textarea>
+                                </div>
+                                <div class="text-center"> 
+                                    <button type="submit" class="btn btn-primary"　class="createBtn"> 更新する </button> 
+                                </div>
+                                <input type="hidden" name="q_id" value="{{ old('q_id', $question->id) }}">
+                            </form>
+                    </details>
+                </div>
             <?php endif; ?>
             <details class="reply_form_content">
                 <summary>この回答に対する返信</summary>
