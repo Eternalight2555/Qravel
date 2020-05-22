@@ -37,6 +37,7 @@
 }
 .questionShowPage .content .reply_form {
   padding-left: 5%;
+  word-wrap: break-word;
   border-bottom: solid 1px #d0d0d0;
 }
 .questionShowPage .content .answer_count {
