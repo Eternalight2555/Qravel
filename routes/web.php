@@ -39,10 +39,12 @@ Route::get('/bookmark/{question_id}','QuestionsController@bookmark');
 
 Route::get('/question/show/{question_id}','QuestionsController@show');
 Route::get('/question/crear/{question_id}','QuestionsController@crear');
+Route::post('/question/edit/{question_id}', 'QuestionsController@edit');
 
 Route::get('/', 'QuestionsController@index')->name('home');
 
 Route::post('/answer/new/{question_id}', 'AnswersController@store');
+Route::post('/answer/edit/{answer_id}', 'AnswersController@edit');
 
 Route::post('/reply/new/{answer_id}', 'AnswersController@replystore');
 
