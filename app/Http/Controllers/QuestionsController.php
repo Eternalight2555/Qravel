@@ -110,9 +110,7 @@ class QuestionsController extends Controller
         
         // 配列の初期化
         $questions = [];
-        
         $questionstags=[];
-        
         $questionsuser=[];
         // そのページの質問を取得
         for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
@@ -130,7 +128,6 @@ class QuestionsController extends Controller
             }
             $questionstags[$q->id]=$tagnames;
             $questionsuser[$q->id]=User::find($q->user_id)->name;
-
         }
         //eval(\Psy\sh());
         // トップviewにデータを送る
@@ -207,7 +204,8 @@ class QuestionsController extends Controller
         }
         
         // ブックマークしているかを判断する
-        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        if($show_user == NULL) $target = NULL;
+        else $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
         
         return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users,'target' => $target]);
     }
@@ -272,11 +270,11 @@ class QuestionsController extends Controller
     }
     
 
-    public function show_userpage()
+    public function show_userpage($user_id)
     {
 
         // ユーザ番号を取得
-        $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
         
         // Questionモデルを介してデータを取得
         $questions = Question::where('user_id',$user_id)->get();
@@ -286,6 +284,7 @@ class QuestionsController extends Controller
         
         $answered_questions = [];
         $questionstags=[];
+        $answerstags=[];
         
         foreach($questions as $q){
             $tags = TagsQuestion::where('questions_id', $q->id)->get();
@@ -299,16 +298,25 @@ class QuestionsController extends Controller
         foreach($answers as $answer){
             if($answer->parent_id == NULL){
                 array_push($answered_questions,Question::find($answer->Q_id));
+                $tags = TagsQuestion::where('questions_id', $answer->Q_id)->get();
+                $tagnames=[];
+                foreach($tags as $tag){
+                    $t = Tag::where("id",$tag->tags_id)->first();
+                    array_push($tagnames,$t->name);
+                }
+                $answerstags[$answer->Q_id]=$tagnames;
             }
         }
         
         // ブックマークした質問を取得
         $bookmarked_questions = [];
-        
-        $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
-        foreach($bookmarks as $bookmark){
-            if($bookmark->delete_trigger == 0){
-                array_push($bookmarked_questions,Question::find($bookmark->questions_id));
+        if($user_id == Auth::user()->id){
+            
+            $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
+            foreach($bookmarks as $bookmark){
+                if($bookmark->delete_trigger == 0){
+                    array_push($bookmarked_questions,Question::find($bookmark->questions_id));
+                }
             }
         }
         
@@ -316,7 +324,7 @@ class QuestionsController extends Controller
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['tags'=>$questionstags,'user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
+        return view('users/show',['Atags'=>$answerstags,'tags'=>$questionstags,'user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
         
     }
 
@@ -372,12 +380,23 @@ class QuestionsController extends Controller
         // 該当データの個数
         $data_num = count($searched);
         
+        $questionstags = [];
         // そのページの質問を取得
         for($i = $start_id; $i < $end_id && $i < $data_num; $i++){
             array_push($questions,$searched[$i]);
+            
+            $id=$searched[$i]->id;
+            $tags = TagsQuestion::where('questions_id', $id)->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$id]=$tagnames;
         }
         
-        return view('questions/search',['word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
+        return view('questions/search',['tags'=>$questionstags,'word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
         
     }
     // ここまで検索機能
@@ -420,12 +439,23 @@ class QuestionsController extends Controller
         // 該当データの個数
         $data_num = count($searched);
         
+        $questionstags=[];
         // そのページの質問を取得
+        // eval(\Psy\sh());
         for($i = $start_id; $i < $end_id && $i < $data_num; $i++){
             array_push($questions,$searched[$i]);
+            $id=$searched[$i]->id;
+            $tags = TagsQuestion::where('questions_id', $id)->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$id]=$tagnames;
         }
         
-        return view('questions/search',['word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
+        return view('questions/search',['tags'=>$questionstags,'word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
         
     }
     

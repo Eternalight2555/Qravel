@@ -58,6 +58,7 @@
         }
         .reply_form{
         	padding-left: 5%;
+        	word-wrap: break-word;
         	border-bottom:solid 1px lighten($border_color);
         }
         .answer_count{

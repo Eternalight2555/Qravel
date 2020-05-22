@@ -1,4 +1,7 @@
-/* モーダルウィンドウのcss設定 */.questionShowPage {
+/* モーダルウィンドウのcss設定 */.question a {
+  color: #2e9afe;
+}
+.questionShowPage {
   margin-top: 60px;
 }
 .questionShowPage .content {
@@ -50,6 +53,7 @@
 }
 .questionShowPage .content .reply_form {
   padding-left: 5%;
+  word-wrap: break-word;
   border-bottom: solid 1px #d0d0d0;
 }
 .questionShowPage .content .answer_count {
