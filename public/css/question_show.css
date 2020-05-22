@@ -1,4 +1,7 @@
-/* モーダルウィンドウのcss設定 */.question a {
+/* モーダルウィンドウのcss設定 */a {
+  color: #347dc5;
+}
+a h3 {
   color: #2e9afe;
 }
 .questionShowPage {
@@ -30,7 +33,7 @@
   display: none;
 }
 .questionShowPage .content .answer_edit_form details summary, .questionShowPage .content .question_edit_form details summary {
-  color: #2e9afe;
+  color: #347dc5;
   cursor: pointer;
 }
 .questionShowPage .content .answer_edit_form form, .questionShowPage .content .question_edit_form form {
