@@ -15,7 +15,7 @@
                         
                         <div class="question-status">
                             <?php if($question->crear_flag){ ?>
-                            <p id="end">回答済</p>
+                            <p id="end">解決済</p>
                             <?php }else{ ?>
                             <p id="noend">受付中</p>
                             <?php } ?>
