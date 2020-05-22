@@ -1,3 +1,6 @@
+.question a {
+  color: #2e9afe;
+}
 .top_wrappe .content .search_wrapper {
   margin-top: 90px;
 }
@@ -35,4 +38,9 @@
 }
 .top_wrappe .content .search_wrapper .page_btn {
   margin-top: 20px;
+}
+.tag {
+  color: #111;
+  font-weight: lighter;
+  background-color: #a9d0f5;
 }

@@ -27,27 +27,29 @@
             </div>
         </div>
     </div>
-    <div class="content">
-        <div class="row">
-            <div class="user_book_wrapper col-sm-offset-2 col-sm-8">
-            
-                <!-- ブックマーク -->
-                <h2>ブックマークした質問</h2>
-                @foreach($bookmarked_questions as $bookmark)
-                    <div class="user_question">
-                        <div class="question">
-                            <a href="/question/show/{{ $bookmark->id }}" class="question_link">
-                                <h3 class="question_title">{{ $bookmark->title }}</h3>
-                            </a>
-                        </div>
-                        <div class="question-status"><p>受付中</p></div>
-                        <div class="question-tag">ここにタグを表示</div>
-                    </div>
-                @endforeach
+    @if($user_id == Auth::user()->id)
+        <div class="content">
+            <div class="row">
+                <div class="user_book_wrapper col-sm-offset-2 col-sm-8">
                 
+                    <!-- ブックマーク -->
+                    <h2>ブックマークした質問</h2>
+                    @foreach($bookmarked_questions as $bookmark)
+                        <div class="user_question">
+                            <div class="question">
+                                <a href="/question/show/{{ $bookmark->id }}" class="question_link">
+                                    <h3 class="question_title">{{ $bookmark->title }}</h3>
+                                </a>
+                            </div>
+                            <div class="question-status"><p>受付中</p></div>
+                            <div class="question-tag">ここにタグを表示</div>
+                        </div>
+                    @endforeach
+                    
+                </div>
             </div>
         </div>
-    </div>
+    @endif
     <div class="content">
         <div class="row">
             <div class="user_question_wrapper col-sm-offset-2 col-sm-8">
@@ -94,8 +96,20 @@
                                 <h3 class="question_title">{{ $answered_question->title }}</h3>
                         </a>
                     </div>
-                    <div class="question-status"><p>解決済み</p></div>
-                    <div class="question-tag">ここにタグを表示</div>
+                    <div class="question-status">
+                        <?php if($answered_question->crear_flag){ ?>
+                        <p id="end">回答済</p>
+                        <?php }else{ ?>
+                        <p id="noend">受付中</p>
+                        <?php } ?>
+                    </div>
+                    <div class="question-tag">
+                        <p>
+                        @foreach ($Atags[$answered_question->id] as $tagname) 
+                            <span class="badge badge-secondary tag">{{ $tagname }}</span>
+                        @endforeach
+                        </p>
+                    </div>
                 </div>
                 @endforeach
                 </div>

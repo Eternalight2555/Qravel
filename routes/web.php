@@ -19,7 +19,7 @@ Route::group(['middleware'=>['auth']],function(){
 
 
 // ユーザ詳細画面表示用
-Route::get('/users/show','QuestionsController@show_userpage');
+Route::get('/users/show/{user_id}','QuestionsController@show_userpage');
 
 // ページ番号をクリックしたとき、ページ遷移
 Route::get('/ranking_page/{page_id}','QuestionsController@paging');

@@ -1,3 +1,6 @@
+.question a {
+  color: #2e9afe;
+}
 .top_wrapper .content .ranking_wrapper {
   margin-top: 90px;
 }
@@ -6,7 +9,7 @@
   border-bottom: solid 1px #d0d0d0;
 }
 .top_wrapper .content .ranking_wrapper .question a {
-  color: #2e9afe;
+  color: ;
 }
 .top_wrapper .content .ranking_wrapper .question .question_title {
   margin: 10px 0;
