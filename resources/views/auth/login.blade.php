@@ -32,8 +32,7 @@
       </div>
     </form>
     <div class="text-center">
-      <!--<p class="acountPage_link"><a href="{{ route('register') }}">アカウントを作成</a></p>-->
-      <input type="submit" onClick="location.href='{{ route('register') }}'" value="アカウントを作成"　class="loginBtn" data-disable-with="アカウントを作成">
+      <p class="acountPage_link"><a href="{{ route('register') }}">アカウントを作成</a></p>
     </div>
   </div>
 </div>
