@@ -110,9 +110,7 @@ class QuestionsController extends Controller
         
         // 配列の初期化
         $questions = [];
-        
         $questionstags=[];
-        
         $questionsuser=[];
         // そのページの質問を取得
         for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
@@ -130,7 +128,6 @@ class QuestionsController extends Controller
             }
             $questionstags[$q->id]=$tagnames;
             $questionsuser[$q->id]=User::find($q->user_id)->name;
-
         }
         //eval(\Psy\sh());
         // トップviewにデータを送る
@@ -354,12 +351,23 @@ class QuestionsController extends Controller
         // 該当データの個数
         $data_num = count($searched);
         
+        $questionstags = [];
         // そのページの質問を取得
         for($i = $start_id; $i < $end_id && $i < $data_num; $i++){
             array_push($questions,$searched[$i]);
+            
+            $id=$searched[$i]->id;
+            $tags = TagsQuestion::where('questions_id', $id)->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$id]=$tagnames;
         }
         
-        return view('questions/search',['word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
+        return view('questions/search',['tags'=>$questionstags,'word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
         
     }
     // ここまで検索機能
@@ -402,12 +410,23 @@ class QuestionsController extends Controller
         // 該当データの個数
         $data_num = count($searched);
         
+        $questionstags=[];
         // そのページの質問を取得
+        // eval(\Psy\sh());
         for($i = $start_id; $i < $end_id && $i < $data_num; $i++){
             array_push($questions,$searched[$i]);
+            $id=$searched[$i]->id;
+            $tags = TagsQuestion::where('questions_id', $id)->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$id]=$tagnames;
         }
         
-        return view('questions/search',['word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
+        return view('questions/search',['tags'=>$questionstags,'word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
         
     }
     
