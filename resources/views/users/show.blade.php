@@ -75,7 +75,7 @@
                         <div class="question-tag">
                             <p>
                             @foreach ($tags[$question->id] as $tagname) 
-                                <span class="badge badge-secondary tag">{{ $tagname }}</span>
+                                <a href="/tagsearch?{{ http_build_query(['name'=>$tagname]) }}&page=1" class="tag badge badge-pill badge-primary">{{ $tagname }}</a>
                             @endforeach
                             </p>
                         </div>
@@ -108,7 +108,7 @@
                     <div class="question-tag">
                         <p>
                         @foreach ($Atags[$answered_question->id] as $tagname) 
-                            <span class="badge badge-secondary tag">{{ $tagname }}</span>
+                            <a href="/tagsearch?{{ http_build_query(['name'=>$tagname]) }}&page=1" class="tag badge badge-pill badge-primary">{{ $tagname }}</a>
                         @endforeach
                         </p>
                     </div>
