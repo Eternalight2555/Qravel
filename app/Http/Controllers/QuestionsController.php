@@ -207,7 +207,8 @@ class QuestionsController extends Controller
         }
         
         // ブックマークしているかを判断する
-        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        if($show_user == NULL) $target = NULL;
+        else $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
         
         return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users,'target' => $target]);
     }
