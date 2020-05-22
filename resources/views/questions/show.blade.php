@@ -86,17 +86,18 @@
     <div class="content col-sm-offset-2 col-sm-8">
         <div class="question_title">
             <h2 class="title">{{ $question->title }}</h2>
-            
-                @if($show_user==null)
-                    <a href={{ route('login') }}>
-                        ログインしてブックマークする
-                    </a> 
-                @elseif($target == null || $target->delete_trigger == 1)
-                    <a onclick="return confirm('{{ $question->title }}をブックマークしますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマーク</a>
-                @else
-                    <a onclick="return confirm('{{ $question->title }}をブックマークから外しますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマークを外す</a>
-                @endif
-
+                <div class="bookmark">
+                    <p>質問者：<a href="/users/show/{{ $question_user->id }}">{{ $question_user->name }}</a></p>
+                    @if($show_user==null)
+                        <a href={{ route('login') }}>
+                            ログインしてブックマークする
+                        </a> 
+                    @elseif($target == null || $target->delete_trigger == 1)
+                        <a onclick="return confirm('{{ $question->title }}をブックマークしますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマーク</a>
+                    @else
+                        <a onclick="return confirm('{{ $question->title }}をブックマークから外しますか？')" href="{{ url('/bookmark', $question->id)  }}">ブックマークを外す</a>
+                    @endif
+                </div>
         </div>
         <div class="question_main">
             <h4>質問内容</h4>
@@ -113,10 +114,11 @@
         
         <div class="text-center">
             <?php
-                if($question->clear_flag==true){ ?>ｘ
-                    
+                if($question->crear_flag==true){ ?>
+                    <h4><span>この質問は解決しました</span></h4>
             <?php }else if($show_user==$question->user_id){ ?>
                     <!-- <a href="/" class="Btn">編集する</a> -->
+                <a class="btn btn-primary" href="{{ url('/question/crear', $question->id) }}" role="button">回答済にする</a>
                 <div class="question_edit_form">
                     <details>
                         <summary>編集する</summary>
@@ -163,7 +165,7 @@
         @foreach ($answers as $answer) 
         <div class="answer_form_content col-sm-offset-2 col-sm-8">
             <div>
-                <h4>{{$answer_users[$i]}}さんの回答</h4>
+                <h4><a href="/users/show/{{ $answer->user_id }}">{{$answer_users[$i]}}</a>さんの回答</h4>
                 <p>{{$answer->content}}</p>
             </div>
             <div>

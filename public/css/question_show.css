@@ -14,20 +14,28 @@ a h3 {
   margin: 10px 0;
   border-bottom: solid 2px #d0d0d0;
 }
+.questionShowPage .content .question_title .bookmark {
+  text-align: right;
+}
 .questionShowPage .content .tag {
   color: #111;
   font-weight: lighter;
   background: #a9d0f5;
 }
 .questionShowPage .content .question_main p {
+  background-color: #fcfcfc;
   border-radius: 5px;
   padding: 5px;
   border: solid 1px #d0d0d0;
 }
 .questionShowPage .content .answer_form_content p {
+  background-color: #fcfcfc;
   border-radius: 5px;
   padding: 5px;
   border: solid 1px #d0d0d0;
+}
+.questionShowPage .content .question_edit_form {
+  margin-top: 10px;
 }
 .questionShowPage .content .answer_edit_form details summary::-webkit-details-marker, .questionShowPage .content .question_edit_form details summary::-webkit-details-marker {
   display: none;
@@ -63,6 +71,9 @@ a h3 {
   border-bottom: solid 2px #d0d0d0;
 }
 .questionShowPage .content .answer_count span {
+  color: #f78181;
+}
+.questionShowPage .content h4 span {
   color: #f78181;
 }
 .modal-body textarea {
