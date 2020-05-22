@@ -30,12 +30,7 @@
                 border-bottom:solid 1px lighten($border_color);
             }
             
-        
-        .questions {
-            .question_title {
-                margin: 10px 0;
-            }
-            .question-status {
+        .question-status {
                 #end{
             background-color:$status_color_end;
             width: 50px;
@@ -50,6 +45,14 @@
             border-radius: 4px;
             color: #F4F5F7;
            }
+           
+        }
+        .questions {
+            .question_title {
+                margin: 10px 0;
+            }
+            .question-status {
+
                 p {
                     margin: 0;
                 }
