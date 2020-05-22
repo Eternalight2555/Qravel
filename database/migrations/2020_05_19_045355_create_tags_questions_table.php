@@ -15,6 +15,7 @@ class CreateTagsQuestionsTable extends Migration
     {
 
         Schema::create('tags_questions',function (Blueprint $table){
+            $table->increments('id');
             $table->unsignedInteger('tags_id');
             $table->unsignedInteger('questions_id');
             $table->primary(['tags_id','questions_id']);
