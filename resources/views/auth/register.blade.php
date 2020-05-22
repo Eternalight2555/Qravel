@@ -41,7 +41,7 @@
           <input class="form-control" placeholder="パスワードを再度入力してください" autocomplete="off" type="password" name="password_confirmation" required>
         </div>
         <div class="form-group text-center">
-          <input type="submit" name="commit" value="アカウントを作成" class="loginBtn" data-disable-with="アカウントを作成">
+          <input type="submit" name="commit" value="アカウントを作成" class="btn btn-success" data-disable-with="アカウントを作成">
         </div>
     </form>
     <div class="text-center">
