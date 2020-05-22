@@ -86,7 +86,7 @@
               <a class="nav-link questionNew" href="/">Qravel</a>
           </li>
           <li class="header_serch">
-            <form action="/search" method="get">
+            <form action="/search" method="post">
                {{ csrf_field() }}
               <input class="search" type="search" name="key_word" placeholder="キーワードを入力">
               <button type="submit" name="submit">検索</button>

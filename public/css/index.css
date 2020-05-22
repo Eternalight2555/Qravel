@@ -11,12 +11,12 @@ a h3 {
   width: 100%;
 }
 .top_wrapper .content .topview_wrapper img {
-  width: 90%;
+  width: 100%;
 }
 .top_wrapper .content .topview_wrapper h1 {
   position: absolute;
   color: white;
-  top: 60%;
+  top: 40%;
   left: 27%;
   font-size: 3.4vw;
   background-color: rgba(0, 0, 0, 0.3);
