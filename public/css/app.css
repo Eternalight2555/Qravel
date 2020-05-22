@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-.question a {
+a {
+  color: #347dc5;
+}
+a h3 {
   color: #2e9afe;
 }
 body {
