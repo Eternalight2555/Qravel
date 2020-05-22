@@ -4,7 +4,13 @@
 
 <div class="top_wrapper">
     <div class="content">
+        <div class="topview_wrapper">
+            <img src="{{secure_asset('img/top_image.jpg')}}"></img>
+            <h1>エンジニアのためのQ&Aサイト</h1>
+        </div>
         <div class="ranking_wrapper container">
+            
+            <h1>質問一覧</h1>
             <!-- 質問を表示 -->
               @foreach($questions as $question)
                 <div class="row">

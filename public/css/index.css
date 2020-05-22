@@ -4,8 +4,33 @@ a {
 a h3 {
   color: #2e9afe;
 }
+.top_wrapper .content .topview_wrapper {
+  margin-top: 60px;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+.top_wrapper .content .topview_wrapper img {
+  width: 90%;
+}
+.top_wrapper .content .topview_wrapper h1 {
+  position: absolute;
+  color: white;
+  top: 60%;
+  left: 27%;
+  font-size: 3.4vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1vw;
+  border-radius: 2vw;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 0 1.6vw rgba(0, 0, 0, 0.3);
+}
 .top_wrapper .content .ranking_wrapper {
-  margin-top: 90px;
+  margin-top: 2vw;
+}
+.top_wrapper .content .ranking_wrapper h1 {
+  text-align: center;
+  font-size: 30px;
 }
 .top_wrapper .content .ranking_wrapper .question {
   padding: 10px 10px 20px 10px;
@@ -44,4 +69,9 @@ a h3 {
 }
 .top_wrapper .content .btn {
   margin-top: 20px;
+}
+@media (max-width: 767px) {
+  .top_wrapper .content .topview_wrapper img {
+    width: 100%;
+  }
 }
