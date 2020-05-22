@@ -244,11 +244,11 @@ class QuestionsController extends Controller
     }
     
 
-    public function show_userpage()
+    public function show_userpage($user_id)
     {
 
         // ユーザ番号を取得
-        $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
         
         // Questionモデルを介してデータを取得
         $questions = Question::where('user_id',$user_id)->get();
@@ -276,11 +276,13 @@ class QuestionsController extends Controller
         
         // ブックマークした質問を取得
         $bookmarked_questions = [];
-        
-        $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
-        foreach($bookmarks as $bookmark){
-            if($bookmark->delete_trigger == 0){
-                array_push($bookmarked_questions,Question::find($bookmark->questions_id));
+        if($user_id == Auth::user()->id){
+            
+            $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
+            foreach($bookmarks as $bookmark){
+                if($bookmark->delete_trigger == 0){
+                    array_push($bookmarked_questions,Question::find($bookmark->questions_id));
+                }
             }
         }
         

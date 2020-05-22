@@ -25,7 +25,7 @@
                                 <span class="badge badge-pill badge-primary">{{ $tagname }}</span>
                             @endforeach
                         </div>
-                        <div class="questioner">{{$usernames[$question->id]}}</div>
+                        <div class="questioner"><a href="/users/show/{{ $question->user_id }}">{{$usernames[$question->id]}}</a></div>
                     </div>
                 </div>
               @endforeach
