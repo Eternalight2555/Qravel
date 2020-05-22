@@ -105,15 +105,15 @@ class QuestionsController extends Controller
         $max_page = ceil($question_count/MAX);
         
         // 開始地点と終了地点の質問idを取得
-        $end_id = $page_id * MAX;
-        $start_id = $end_id - MAX + 1;
+        $start_id = $question_count;
+        $end_id = $start_id - MAX;
         
         // 配列の初期化
         $questions = [];
         $questionstags=[];
         $questionsuser=[];
         // そのページの質問を取得
-        for($i = $start_id; $i <= $end_id && Question::find($i) != null; $i++){
+        for($i = $start_id; $i >= $end_id && Question::find($i) != null; $i--){
             
             $q = Question::find($i);
             array_push($questions,$q);
@@ -240,7 +240,7 @@ class QuestionsController extends Controller
         return redirect('/question/show/'.$question_id);
     }
     
-        public function edit(Request $request)
+    public function edit(Request $request)
     {
         $messages = ['content.required' => '回答を入力してください。',];
         //Validatorを使って入力された値のチェック(バリデーション)処理　（今回は256以上と空欄の場合エラーになります）
