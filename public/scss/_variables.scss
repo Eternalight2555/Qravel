@@ -12,6 +12,8 @@ $pickup:#F78181;
 $status_color_noend:#F78181;
 
 //質問タイトルのリンクの色
-
-$link_color:#2E9AFE;
-
+.question {
+    a{
+        color: #2E9AFE;
+    }
+}
