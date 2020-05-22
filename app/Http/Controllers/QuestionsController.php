@@ -260,6 +260,7 @@ class QuestionsController extends Controller
         
         $answered_questions = [];
         $questionstags=[];
+        $answerstags=[];
         
         foreach($questions as $q){
             $tags = TagsQuestion::where('questions_id', $q->id)->get();
@@ -273,6 +274,13 @@ class QuestionsController extends Controller
         foreach($answers as $answer){
             if($answer->parent_id == NULL){
                 array_push($answered_questions,Question::find($answer->Q_id));
+                $tags = TagsQuestion::where('questions_id', $answer->Q_id)->get();
+                $tagnames=[];
+                foreach($tags as $tag){
+                    $t = Tag::where("id",$tag->tags_id)->first();
+                    array_push($tagnames,$t->name);
+                }
+                $answerstags[$answer->Q_id]=$tagnames;
             }
         }
         
@@ -290,7 +298,7 @@ class QuestionsController extends Controller
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['tags'=>$questionstags,'user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
+        return view('users/show',['Atags'=>$answerstags,'tags'=>$questionstags,'user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
         
     }
 

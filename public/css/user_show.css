@@ -34,3 +34,8 @@
 .top_wrapper .content .questions .question-status p {
   margin: 0;
 }
+.tag {
+  color: #111;
+  font-weight: lighter;
+  background-color: #a9d0f5;
+}

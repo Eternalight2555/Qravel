@@ -88,7 +88,13 @@
                         </a>
                     </div>
                     <div class="question-status"><p>解決済み</p></div>
-                    <div class="question-tag">ここにタグを表示</div>
+                    <div class="question-tag">
+                        <p>
+                        @foreach ($Atags[$answered_question->id] as $tagname) 
+                            <span class="badge badge-secondary tag">{{ $tagname }}</span>
+                        @endforeach
+                        </p>
+                    </div>
                 </div>
                 @endforeach
                 </div>
