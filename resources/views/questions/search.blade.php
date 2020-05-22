@@ -34,7 +34,6 @@
                             @endforeach
                             </p>
                         </div>
-                        <div class="questioner">ユーザー</div>
                     </div>
                     @endforeach
                     </div>
