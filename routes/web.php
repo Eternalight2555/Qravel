@@ -28,7 +28,7 @@ Route::get('/ranking_page/{page_id}','QuestionsController@paging');
 Route::get('/question/new','QuestionsController@question_new');
 
 // 検索ボタンを押したとき検索結果をトップページに表示
-Route::post('/search','QuestionsController@search');
+Route::get('/search','QuestionsController@search');
 
 // 検索結果ページからのページング
 Route::get('/search/{key_word}/{page_id}','QuestionsController@search_paging');
