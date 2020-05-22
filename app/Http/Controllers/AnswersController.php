@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Question;
 use App\User;
 use App\Answer;
+use App\UsersAnswer;
 use Auth;
 use Validator;
 
@@ -102,4 +103,26 @@ class AnswersController extends Controller
         return redirect('/question/show/'.$request->q_id);
         
     }
+    
+    public function goodAnswer($answer_id)
+    {
+        // 既にいいねされているかを判断する
+        $target = UsersAnswer::where('answer_id',$answer_id)->where('user_id',Auth::user()->id)->first();
+        $answer=Answer::find($answer_id);
+        if ($target == null){
+            $good_ans = new UsersAnswer;
+            $good_ans->user_id = Auth::user()->id;
+            $good_ans->answer_id = $answer_id;
+            $good_ans->save();
+            $answer->good_count++;
+            $answer->save();
+        }else{
+            UsersAnswer::destroy($target->id);
+            $answer->good_count--;
+            $answer->save();
+        }
+        $question=Question::find($answer->Q_id);
+        return redirect('/question/show/'.$question->id);
+    }
+    
 }
