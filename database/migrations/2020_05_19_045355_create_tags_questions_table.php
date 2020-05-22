@@ -18,7 +18,7 @@ class CreateTagsQuestionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('tags_id');
             $table->unsignedInteger('questions_id');
-            $table->primary(['tags_id','questions_id']);
+            //$table->primary(['tags_id','questions_id']);
             $table->timestamps();
             // 外部キー制約
             $table->foreign('tags_id')->references('id')->on('tags')->onDelete('cascade');
