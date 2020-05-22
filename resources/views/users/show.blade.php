@@ -44,7 +44,13 @@
                                 <p id="noend">受付中</p>
                                 <?php } ?>
                             </div>
-                            <div class="question-tag">ここにタグを表示</div>
+                            <div class="question-tag">
+                                <p>
+                                @foreach ($Btags[$bookmark->id] as $tagname) 
+                                    <a href="/tagsearch?{{ http_build_query(['name'=>$tagname]) }}&page=1" class="tag badge badge-pill badge-primary">{{ $tagname }}</a>
+                                @endforeach
+                                </p>
+                            </div>
                         </div>
                     @endforeach
                     
