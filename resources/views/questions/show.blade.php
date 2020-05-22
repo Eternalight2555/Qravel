@@ -113,10 +113,11 @@
         
         <div class="text-center">
             <?php
-                if($question->clear_flag==true){ ?>ｘ
-                    
+                if($question->crear_flag==true){ ?>
+                    <h4><span>この質問は解決しました</span></h4>
             <?php }else if($show_user==$question->user_id){ ?>
                     <!-- <a href="/" class="Btn">編集する</a> -->
+                <a class="btn btn-primary" href="{{ url('/question/crear', $question->id) }}" role="button">回答済にする</a>
                 <div class="question_edit_form">
                     <details>
                         <summary>編集する</summary>
@@ -163,7 +164,7 @@
         @foreach ($answers as $answer) 
         <div class="answer_form_content col-sm-offset-2 col-sm-8">
             <div>
-                <h4>{{$answer_users[$i]}}さんの回答</h4>
+                <h4><a href="/users/show/{{ $answer->user_id }}">{{$answer_users[$i]}}</a>さんの回答</h4>
                 <p>{{$answer->content}}</p>
             </div>
             <div>

@@ -16,17 +16,22 @@
         }
         
         .question_main p{
+          background-color: $content_bg_color;
         	border-radius: 5px; 
         	padding: 5px;
         	border:solid 1px lighten($border_color);
         }
         
         .answer_form_content p{
+          background-color: $content_bg_color;
         	border-radius: 5px; 
         	padding: 5px;
         	border:solid 1px lighten($border_color);
         }
         
+        .question_edit_form{
+         margin-top: 10px; 
+        }
         .answer_edit_form, .question_edit_form{
           
           details summary::-webkit-details-marker {
@@ -64,6 +69,11 @@
         .answer_count{
         	border-bottom:solid 2px lighten($border_color);
         	span{
+        		color: $pickup;
+        	}
+        }
+        h4{
+        span{
         		color: $pickup;
         	}
         }
