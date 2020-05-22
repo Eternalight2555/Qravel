@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    @if($user_id == Auth::user()->id)
+    @if($user_id == Auth::id())
         <div class="content">
             <div class="row">
                 <div class="user_book_wrapper col-sm-offset-2 col-sm-8">
