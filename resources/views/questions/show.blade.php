@@ -30,56 +30,6 @@
   </div>
 </div>
 
-<!-- 質問編集用モーダル -->
-<div class="modal fade" id="modal2" tabindex="-1"
-      role="dialog" aria-labelledby="label1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="label2">回答内容</h5>
-      </div>
-      <div class="modal-body">
-        <form action= "{{ url('/question/edit', $question->id) }}" method="POST" class="form-horizontal">
-          {{csrf_field()}} 
-        <div class="form-group"> 
-          <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{ old('content') }}</textarea>
-        </div>
-        <input type="hidden" name="q_id" value="{{ old('q_id', $question->id) }}">
-        <div class="text-center">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">作成する</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 回答編集用モーダル -->
-<div class="modal fade" id="modal3" tabindex="-1"
-      role="dialog" aria-labelledby="label1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="label3">回答内容</h5>
-      </div>
-      <div class="modal-body">
-        <form action= "{{ url('/answer/edit', $question->id) }}" method="POST" class="form-horizontal">
-          {{csrf_field()}} 
-        <div class="form-group"> 
-          <textarea name="content" class="form-control" value="{{ old('content') }}" placeholder="詳細">{{ old('content') }}</textarea>
-        </div>
-        <input type="hidden" name="q_id" value="{{ old('q_id', $question->id) }}">
-        <div class="text-center">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">作成する</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- モーダルウィンドウここまで -->
 @include('common.errors')
 <div class="questionShowPage">
@@ -170,7 +120,7 @@
             </div>
             <div>
                 <span>役に立ったと思った人：{{$answer->good_count}}<br></span>
-                <a onclick="return confirm('この回答を評価しますか？')" href="/">役に立った</a>
+                <a onclick="return confirm('この回答を評価しますか？')" href="{{ url('/goodanswer', $answer->id)  }}">役に立った</a>
             </div>
             
             <?php if($show_user==$answer->user_id): ?>
