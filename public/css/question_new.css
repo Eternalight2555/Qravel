@@ -1,4 +1,7 @@
-.question a {
+a {
+  color: #347dc5;
+}
+a h3 {
   color: #2e9afe;
 }
 .panel-body {

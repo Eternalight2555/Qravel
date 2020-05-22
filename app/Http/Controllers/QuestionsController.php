@@ -174,9 +174,9 @@ class QuestionsController extends Controller
     
     public function show($question_id)
     {
-        // 質問をすべて取得
         $question = Question::find($question_id);
         $show_user= Auth::id();
+        $question_user = User::find($question->user_id);
         
         $answers = Answer::where('Q_id',$question_id)
                     ->where('parent_id',null)
@@ -207,7 +207,7 @@ class QuestionsController extends Controller
         if($show_user == NULL) $target = NULL;
         else $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
         
-        return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users,'target' => $target]);
+        return view('questions/show',['question_user'=>$question_user,'tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users,'target' => $target]);
     }
     
     public function bookmark($question_id)
@@ -307,9 +307,9 @@ class QuestionsController extends Controller
         
         // ブックマークした質問を取得
         $bookmarked_questions = [];
-        if($user_id == Auth::user()->id){
+        if($user_id == Auth::id()){
             
-            $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
+            $bookmarks = UsersQuestion::where('user_id',Auth::id())->get();
             foreach($bookmarks as $bookmark){
                 if($bookmark->delete_trigger == 0){
                     array_push($bookmarked_questions,Question::find($bookmark->questions_id));

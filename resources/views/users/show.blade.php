@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    @if($user_id == Auth::user()->id)
+    @if($user_id == Auth::id())
         <div class="content">
             <div class="row">
                 <div class="user_book_wrapper col-sm-offset-2 col-sm-8">
@@ -37,7 +37,14 @@
                                     <h3 class="question_title">{{ $bookmark->title }}</h3>
                                 </a>
                             </div>
-                            <div class="question-status"><p>受付中</p></div>
+                            <div class="question-status">
+                                <?php if($bookmark->crear_flag){ ?>
+                                <p id="end">解決済</p>
+                                <?php }else{ ?>
+                                <p id="noend">受付中</p>
+                                <?php } ?>
+                            </div>
+                            <div class="question-tag">ここにタグを表示</div>
                         </div>
                     @endforeach
                     
@@ -60,7 +67,7 @@
                         </div>
                         <div class="question-status">
                             <?php if($question->crear_flag){ ?>
-                            <p id="end">回答済</p>
+                            <p id="end">解決済</p>
                             <?php }else{ ?>
                             <p id="noend">受付中</p>
                             <?php } ?>
