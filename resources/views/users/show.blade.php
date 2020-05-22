@@ -96,7 +96,13 @@
                                 <h3 class="question_title">{{ $answered_question->title }}</h3>
                         </a>
                     </div>
-                    <div class="question-status"><p>解決済み</p></div>
+                    <div class="question-status">
+                        <?php if($answered_question->crear_flag){ ?>
+                        <p id="end">回答済</p>
+                        <?php }else{ ?>
+                        <p id="noend">受付中</p>
+                        <?php } ?>
+                    </div>
                     <div class="question-tag">
                         <p>
                         @foreach ($Atags[$answered_question->id] as $tagname) 
