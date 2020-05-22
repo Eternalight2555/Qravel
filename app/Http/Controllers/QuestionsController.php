@@ -281,7 +281,7 @@ class QuestionsController extends Controller
         
         // ブックマークした質問を取得
         $bookmarked_questions = [];
-        if($user_id == Auth::user()->id){
+        if($user_id == Auth::id()){
             
             $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
             foreach($bookmarks as $bookmark){
