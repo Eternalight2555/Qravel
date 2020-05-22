@@ -307,9 +307,9 @@ class QuestionsController extends Controller
         
         // ブックマークした質問を取得
         $bookmarked_questions = [];
-        if($user_id == Auth::user()->id){
+        if($user_id == Auth::id()){
             
-            $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
+            $bookmarks = UsersQuestion::where('user_id',Auth::id())->get();
             foreach($bookmarks as $bookmark){
                 if($bookmark->delete_trigger == 0){
                     array_push($bookmarked_questions,Question::find($bookmark->questions_id));
