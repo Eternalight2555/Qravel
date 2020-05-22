@@ -34,7 +34,7 @@ a h3 {
 .top_wrapper .content .ranking_wrapper .question .question-tag {
   float: left;
 }
-.top_wrapper .content .ranking_wrapper .question .question-tag span {
+.top_wrapper .content .ranking_wrapper .question .question-tag a {
   color: #111;
   font-weight: lighter;
   background-color: #a9d0f5;

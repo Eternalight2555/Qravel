@@ -107,7 +107,7 @@
             タグ名：
             
             @foreach ($tagnames as $tagname) 
-                <span class="badge badge-secondary tag">{{ $tagname }}</span>
+                <a href="/tagsearch?{{ http_build_query(['name'=>$tagname]) }}&page=1" class="tag badge badge-pill badge-primary">{{ $tagname }}</a>
             @endforeach
             
         </div>

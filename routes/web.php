@@ -50,3 +50,4 @@ Route::post('/reply/new/{answer_id}', 'AnswersController@replystore');
 
 Route::get('/home', 'QuestionsController@index')->name('home');
 
+Route::get('/tagsearch', 'QuestionsController@search_tag');
