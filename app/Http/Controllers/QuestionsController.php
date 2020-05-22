@@ -272,12 +272,9 @@ class QuestionsController extends Controller
 
     public function show_userpage($user_id)
     {
-
-        // ユーザ番号を取得
-        // $user_id = Auth::user()->id;
         
         // Questionモデルを介してデータを取得
-        $questions = Question::where('user_id',$user_id)->get();
+        $my_questions = Question::where('user_id',$user_id)->get();
         
         // Answerモデルを介してデータを取得
         $answers = Answer::where('user_id',$user_id)->get();
@@ -286,7 +283,7 @@ class QuestionsController extends Controller
         $questionstags=[];
         $answerstags=[];
         
-        foreach($questions as $q){
+        foreach($my_questions as $q){
             $tags = TagsQuestion::where('questions_id', $q->id)->get();
             $tagnames=[];
             foreach($tags as $tag){
@@ -324,7 +321,7 @@ class QuestionsController extends Controller
         $user = User::find($user_id);
         
         // データをユーザ詳細画面に送る
-        return view('users/show',['Atags'=>$answerstags,'tags'=>$questionstags,'user_id' => $user_id, 'questions' => $questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
+        return view('users/show',['Atags'=>$answerstags,'tags'=>$questionstags,'user_id' => $user_id, 'my_questions' => $my_questions, 'answers' => $answers, 'user' => $user, 'answered_questions' => $answered_questions, 'bookmarked_questions' => $bookmarked_questions]);
         
     }
 
