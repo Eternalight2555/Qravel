@@ -14,6 +14,9 @@ a h3 {
   margin: 10px 0;
   border-bottom: solid 2px #d0d0d0;
 }
+.questionShowPage .content .question_title .bookmark {
+  text-align: right;
+}
 .questionShowPage .content .tag {
   color: #111;
   font-weight: lighter;

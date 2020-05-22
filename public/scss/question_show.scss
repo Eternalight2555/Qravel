@@ -8,6 +8,9 @@
         .question_title {
           margin: 10px 0;
           border-bottom:solid 2px lighten($border_color);
+          .bookmark{
+            text-align: right;
+          }
          }
       	.tag{
       		color:$base_font_color;
