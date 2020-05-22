@@ -11,8 +11,6 @@ $status_color_end:#696969;
 $pickup:#F78181;
 $status_color_noend:#F78181;
 
-<<<<<<< HEAD
-
 $link_color: #347dc5;
 $link_color_title:#2E9AFE;
 
@@ -25,14 +23,3 @@ a{
         color: $link_color_title;
     }
 }
-=======
-//質問タイトルのリンクの色
-$link_color:#2E9AFE;
-
-.question {
-    a{
-        color: $link_color;
-    }
-}
-
->>>>>>> cdf4246ca62c97ed5ac88205782318bb6ccbd5e3
