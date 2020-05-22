@@ -56,7 +56,7 @@
                 <h2>過去の質問</h2>
                 <!-- 自分の質問 -->
                 <div class="questions">
-                @foreach($questions as $question)
+                @foreach($my_questions as $question)
                     <div class="user_question">
                         <div class="question">
                         <a href="/question/show/{{ $question->id }}" class="question_link">
