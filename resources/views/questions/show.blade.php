@@ -202,7 +202,9 @@
                 @endforeach
 
                     <div class="text-center" >
-                    <?php if($show_user==null): ?>
+                    <?php if($question->crear_flag==true): ?>
+
+                    <?php elseif($show_user==null): ?>
                         <a href={{ route('login') }} >
                             ログインして返信する
                         </a> 
