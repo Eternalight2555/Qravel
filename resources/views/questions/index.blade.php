@@ -22,7 +22,7 @@
                         </div>
                         <div class="question-tag">
                             @foreach ($tagnames[$question->id] as $tagname) 
-                                <span class="badge badge-pill badge-primary">{{ $tagname }}</span>
+                                <a href="../tagsearch?name={{ $tagname }}&page=1" class="badge badge-pill badge-primary">{{ $tagname }}</a>
                             @endforeach
                         </div>
                         <div class="questioner"><a href="/users/show/{{ $question->user_id }}">{{$usernames[$question->id]}}</a></div>

@@ -456,6 +456,16 @@ class QuestionsController extends Controller
         
     }
     
+    public function search_tag(Request $request){
+        $name=$request->input('name');
+        $page=$request->input('page');
+        
+        $tags = Tag::where("name",$name)->get();
+        
+        
+        eval(\Psy\sh());
+    }
+    
     //ログイン画面に遷移
     public function login()
     {
