@@ -1,4 +1,7 @@
-/* モーダルウィンドウのcss設定 */.questionShowPage {
+/* モーダルウィンドウのcss設定 */.question a {
+  color: #2e9afe;
+}
+.questionShowPage {
   margin-top: 60px;
 }
 .questionShowPage .content {
