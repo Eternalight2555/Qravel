@@ -328,9 +328,8 @@ class QuestionsController extends Controller
     // ここから検索機能
     public function search(Request $request)
     {
-        
         // 検索した文字列を取得する
-        $word = strtolower($request->key_word);
+        $word = strtolower($request->input('key_word'));
         
         // 全角スペースを半角スペースに変換
         $check = mb_convert_kana($word, 's');
