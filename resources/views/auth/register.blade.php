@@ -8,8 +8,8 @@
       <form class="mt-5, signupForm" id="new_user" action="{{ route('register') }}" accept-charset="UTF-8" method="post">
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-          <label for="user_name">お名前</label>
-          <input class="form-control" placeholder="名前を入力してください" type="text" name="name" value="{{ old('name') }}" required autofocus>
+          <label for="user_name">お名前（12文字以内）</label>
+          <input class="form-control" placeholder="名前を入力してください" type="text" name="name" maxlength='12' value="{{ old('name') }}" required autofocus>
           @if ($errors->has('name'))
             <span class="help-block">
               <strong>{{ $errors->first('name') }}</strong>
@@ -45,8 +45,7 @@
         </div>
     </form>
     <div class="text-center">
-      <!--<p class="acountPage_link"><a href="{{ route('login') }}">アカウントにサインイン</a></p>-->
-      <input type="submit" onClick="location.href='{{ route('login') }}'" value="既にアカウントをお持ちの場合"　class="loginBtn" data-disable-with="既にアカウントをお持ちの場合">
+      <p class="acountPage_link"><a href="{{ route('login') }}">アカウントにサインイン</a></p>
     </div>
   </div>
 </div>
