@@ -328,9 +328,8 @@ class QuestionsController extends Controller
     // ここから検索機能
     public function search(Request $request)
     {
-        
         // 検索した文字列を取得する
-        $word = strtolower($request->key_word);
+        $word = strtolower($request->input('key_word'));
         
         // 全角スペースを半角スペースに変換
         $check = mb_convert_kana($word, 's');
@@ -454,6 +453,54 @@ class QuestionsController extends Controller
         
         return view('questions/search',['tags'=>$questionstags,'word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
         
+    }
+    
+    public function search_tag(Request $request){
+        $name=$request->input('name');
+        $page_id=$request->input('page');
+        
+        //eval(\Psy\sh());
+        
+        $tags = Tag::where("name",$name)->get();
+        
+        $searched=[];
+        foreach($tags as $tag){
+            $rel = TagsQuestion::where('tags_id', $tag->id)->get();
+            foreach($rel as $r){
+                $q = Question::where("id",$r->questions_id)->first();
+                //eval(\Psy\sh());
+                array_push($searched,$q);
+            }
+        }
+        
+        $max_page = ceil(count($searched)/MAX);
+        
+        // 開始地点と終了地点の質問idを取得
+        $end_id = $page_id * MAX;
+        $start_id = $end_id - MAX;
+        
+        // 該当データの個数
+        $data_num = count($searched);
+        $questions = [];
+        $questionstags=[];
+        // そのページの質問を取得
+        // eval(\Psy\sh());
+        for($i = $start_id; $i < $end_id && $i < $data_num; $i++){
+            array_push($questions,$searched[$i]);
+            $id=$searched[$i]->id;
+            $tags = TagsQuestion::where('questions_id', $id)->get();
+            $tagnames=[];
+            foreach($tags as $tag){
+                $t = Tag::where("id",$tag->tags_id)->first();
+                //eval(\Psy\sh());
+                array_push($tagnames,$t->name);
+            }
+            $questionstags[$id]=$tagnames;
+        }
+        
+        $word=$name;
+        return view('questions/tagsearch',['tags'=>$questionstags,'word' => $word, 'questions' => $questions, 'page_id' => $page_id, 'max_page' => $max_page, 'data_num' => $data_num]);
+
     }
     
     //ログイン画面に遷移

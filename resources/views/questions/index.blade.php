@@ -28,7 +28,7 @@
                         </div>
                         <div class="question-tag">
                             @foreach ($tagnames[$question->id] as $tagname) 
-                                <span class="badge badge-pill badge-primary">{{ $tagname }}</span>
+                                <a href="../tagsearch?{{ http_build_query(['name'=>$tagname]) }}&page=1" class="badge badge-pill badge-primary tag">{{ $tagname }}</a>
                             @endforeach
                         </div>
                         <div class="questioner"><a href="/users/show/{{ $question->user_id }}">{{$usernames[$question->id]}}</a></div>

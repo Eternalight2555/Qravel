@@ -17,6 +17,9 @@
             font-weight: lighter;
           	background:$tag_color;
         }
+        .tag:hover{
+          color:white;
+        }
         
         .question_main p{
           background-color: $content_bg_color;
