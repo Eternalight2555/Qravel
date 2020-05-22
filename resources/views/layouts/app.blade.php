@@ -60,7 +60,7 @@
           <ul class="header_menu_inner">
               <!--ログイン時のView-->
               <li class="user">
-                  <a class="nav-link user-name" href="/users/show" onclick="">
+                  <a class="nav-link user-name" href="/users/show/{{ Auth::user()->id }}" onclick="">
                     {{ Auth::user()->name }}さん
                   </a>
               </li>

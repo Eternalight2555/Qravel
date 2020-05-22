@@ -197,19 +197,18 @@ class QuestionsController extends Controller
             $ans_user=User::find($answer->user_id);
             array_push($answer_users,$ans_user->name);
         }
-        //$tagids = TagsQuestion::where('questions_id',$question_id)->get();
+        
         $tags = TagsQuestion::where('questions_id', $question_id)
             ->get();
         $tagnames=[];
         foreach($tags as $tag){
             $t = Tag::where("id",$tag->tags_id)->first();
-            //eval(\Psy\sh());
             array_push($tagnames,$t->name);
         }
-        //eval(\Psy\sh());
         
         // ブックマークしているかを判断する
-        $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
+        if($show_user == NULL) $target = NULL;
+        else $target = UsersQuestion::where('user_id',Auth::user()->id)->where('questions_id',$question_id)->first();
         
         return view('questions/show',['tagnames'=>$tagnames,'question' => $question,'show_user'=>$show_user,'answers'=>$answers,'reply_list'=>$reply_list,'answer_users'=>$answer_users,'target' => $target]);
     }
@@ -218,7 +217,6 @@ class QuestionsController extends Controller
     {
         // 既にブックマークされているかを判断する
         $target = UsersQuestion::where('questions_id',$question_id)->where('user_id',Auth::user()->id)->first();
-        // eval(\Psy\sh());
         if ($target == null){
             $bookmark = new UsersQuestion;
             $bookmark->user_id = Auth::user()->id;
@@ -246,11 +244,11 @@ class QuestionsController extends Controller
     }
     
 
-    public function show_userpage()
+    public function show_userpage($user_id)
     {
 
         // ユーザ番号を取得
-        $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
         
         // Questionモデルを介してデータを取得
         $questions = Question::where('user_id',$user_id)->get();
@@ -286,11 +284,13 @@ class QuestionsController extends Controller
         
         // ブックマークした質問を取得
         $bookmarked_questions = [];
-        
-        $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
-        foreach($bookmarks as $bookmark){
-            if($bookmark->delete_trigger == 0){
-                array_push($bookmarked_questions,Question::find($bookmark->questions_id));
+        if($user_id == Auth::user()->id){
+            
+            $bookmarks = UsersQuestion::where('user_id',Auth::user()->id)->get();
+            foreach($bookmarks as $bookmark){
+                if($bookmark->delete_trigger == 0){
+                    array_push($bookmarked_questions,Question::find($bookmark->questions_id));
+                }
             }
         }
         
